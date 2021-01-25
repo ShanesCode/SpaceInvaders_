@@ -9,5 +9,5 @@ class MenuScene : public Scene {
 		int navigateMenu(int input, Config& config);
 		int selectedTextIndex;
 		const int menuIndex;
-		MenuScene(std::string sceneName_, std::string musicString_, Config& config);
+		//MenuScene(std::string sceneName_, std::string musicString_, Config& config);
 };
