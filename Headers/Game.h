@@ -22,6 +22,7 @@ class Game {
 
 		AudioManager audioManager;
 		TextureManager textureManager;
+		FontManager fontManager;
 		TextManager textManager;
 
 		void pushScene(Scene* scene);

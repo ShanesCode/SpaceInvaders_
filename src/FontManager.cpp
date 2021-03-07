@@ -3,7 +3,10 @@
 void FontManager::loadFont(const std::string& name, const std::string& filename) {
 	// Load the texture
 	sf::Font font;
-	font.loadFromFile(filename);
+	if (!font.loadFromFile(filename))
+	{
+		std::cout << "There was an error loading the font: " << filename;
+	}
 
 	fonts[name] = font;
 }

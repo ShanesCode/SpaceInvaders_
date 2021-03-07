@@ -72,5 +72,6 @@ void Game::loadSounds() {
 }
 
 void Game::loadFonts() {
-	//textManager.loadFont();
+	fontManager.loadFont("title", "Resource/MachineStd-Bold.otf");
+	fontManager.loadFont("standard", "Resource/space_invaders.ttf");
 }

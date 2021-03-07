@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <map>
+#include <iostream>
 
 class FontManager {
 private:

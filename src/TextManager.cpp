@@ -1,8 +1,12 @@
 #include "..\Headers\TextManager.h"
 
+TextManager::TextManager(FontManager* fontManager_) {
+	fontManager = fontManager_;
+}
+
 void TextManager::createText(const std::string& name, const std::string& fontName, int size, sf::Color color, std::string string, float xpos, float ypos) {
 	sf::Text text;
-	sf::Font font = fontManager.getFontRef(fontName);
+	sf::Font font = fontManager->getFontRef(fontName);
 
 	text.setFont(font);
 	text.setCharacterSize(size);
@@ -16,7 +20,7 @@ void TextManager::createText(const std::string& name, const std::string& fontNam
 
 void TextManager::updateText(const std::string& textName, const std::string& fontName, int size, sf::Color color, std::string string, float xpos, float ypos) {
 	sf::Text text = getTextRef(textName);
-	sf::Font font = fontManager.getFontRef(fontName);
+	sf::Font font = fontManager->getFontRef(fontName);
 	
 	text.setFont(font);
 	text.setCharacterSize(size);

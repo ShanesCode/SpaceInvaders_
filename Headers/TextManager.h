@@ -9,7 +9,7 @@ private:
 	// Map of texts
 	std::map<std::string, sf::Text> texts;
 
-	FontManager fontManager;
+	FontManager* fontManager;
 
 public:
 	void createText(const std::string& name, const std::string& fontName, int size, sf::Color color, std::string string, float xpos, float ypos);
@@ -17,4 +17,6 @@ public:
 
 	// Translate an id into a reference
 	sf::Text& getTextRef(const std::string& text);
+
+	TextManager(FontManager* fontManager_);
 };
