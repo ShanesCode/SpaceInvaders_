@@ -1,11 +1,22 @@
-#include "../Headers/Scenes/GameScene.h"
-#include "../Headers/Scenes/MainMenuScene.h"
+#include "..\Headers\GameScene.h"
+
+// Constructor
+GameScene::GameScene(Game* game_) {
+	game = game_;
+	sf::Vector2f pos = sf::Vector2f(game->window.getSize());
+	view.setSize(pos);
+	guiView.setSize(pos);
+	pos *= 0.5f;
+	view.setCenter(pos);
+	guiView.setCenter(pos);
+}
 
 void GameScene::draw(const float dt) {
-	this->game->window.setView(this->view);
+	game->window.setView(view);
+	game->window.setView(guiView);
 
-	this->game->window.clear(sf::Color::Black);
-	this->game->window.draw(this->game->background);
+	game->window.clear(sf::Color::Green);
+	//game->window.draw(game->background);
 }
 
 void GameScene::update(const float dt) {
@@ -15,24 +26,26 @@ void GameScene::update(const float dt) {
 void GameScene::handleInput() {
 	sf::Event event;
 
-	while (this->game->window.pollEvent(event)) {
+	while (game->window.pollEvent(event)) {
 		switch (event.type) {
 		case sf::Event::Closed: {
 			game->window.close();
 			break;
 		}
 		case sf::Event::Resized: {
-			this->view.setSize(event.size.width, event.size.height);
+			view.setSize(event.size.width, event.size.height);
+			guiView.setSize(event.size.width, event.size.height);
 
-			this->game->background.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
-			this->game->background.setScale(
-				float(event.size.width / float(this->game->background.getTexture()->getSize().x)),
-				float(event.size.height) / float(this->game->background.getTexture()->getSize().y));
+			game->background.setPosition(game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
+			game->background.setScale(
+				float(event.size.width / float(game->background.getTexture()->getSize().x)),
+				float(event.size.height) / float(game->background.getTexture()->getSize().y)
+			);
 			break;
 		}
 		case sf::Event::KeyPressed: {
 			if (event.key.code == sf::Keyboard::Escape) {
-				this->game->window.close();
+				pauseGame();
 			}
 		}
 		default: break;
@@ -40,14 +53,7 @@ void GameScene::handleInput() {
 	}
 }
 
-GameScene::GameScene(Game* game) {
-	this->game = game;
-	sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
-	this->view.setSize(pos);
-	pos *= 0.5f;
-	this->view.setCenter(pos);
-}
-
-void GameScene::loadGame() {
-	this->game->pushScene(new MainMenuScene(this->game));
+void GameScene::pauseGame() {
+	game->pushScene(new PauseMenuScene(game));
+	std::cout << "PauseMenu" << std::endl;
 }

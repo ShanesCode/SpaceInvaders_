@@ -1,24 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Animation.h"
 #include <vector>
-
-class Animation {
-public:
-	unsigned int startFrame;
-	unsigned int endFrame;
-
-	float duration;
-
-	Animation(unsigned int startFrame, unsigned int endFrame, float duration) {
-		this->startFrame = startFrame;
-		this->endFrame = endFrame;
-		this->duration = duration;
-	}
-
-	unsigned int getLength() {
-		return endFrame - startFrame + 1;
-	}
-};
 
 class AnimationHandler {
 private:
@@ -47,15 +30,6 @@ public:
 	sf::IntRect frameSize;
 
 	// Constructor
-	AnimationHandler() {
-		this->time = 0.0f;
-		this->currentAnimation = -1;
-	}
-
-	AnimationHandler(const sf::IntRect& frameSize) {
-		this->frameSize = frameSize;
-
-		this->time = 0.0f;
-		this->currentAnimation = -1;
-	}
+	AnimationHandler();
+	AnimationHandler(const sf::IntRect& frameSize_);
 };

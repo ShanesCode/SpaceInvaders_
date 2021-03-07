@@ -1,9 +1,4 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include "../Headers/Game.h"
-#include "../Headers/Scene.h"
-#include "../Headers/Config.h"
-#include "../Headers/Scenes/MainMenuScene.h"
+#include "..\Headers\MainMenuScene.h"
 
 int main()
 {

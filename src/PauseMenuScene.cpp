@@ -1,27 +1,27 @@
-#include "..\Headers\MainMenuScene.h"
+#include "..\Headers\PauseMenuScene.h"
 
 // Constructor
-MainMenuScene::MainMenuScene(Game* game_) {
+PauseMenuScene::PauseMenuScene(Game* game_) {
 	game = game_;
 	sf::Vector2f pos = sf::Vector2f(game->window.getSize());
 	view.setSize(pos);
 	pos *= 0.5f;
 	view.setCenter(pos);
-	std::cout << "MainMenu" << std::endl;
 }
 
-void MainMenuScene::draw(const float dt) {
+void PauseMenuScene::draw(const float dt) {
 	game->window.setView(view);
 
-	game->window.clear(sf::Color::Black);
-	game->window.draw(game->background);
+	game->window.clear(sf::Color::Magenta);
+	//game->window.draw(game->background);
 }
 
-void MainMenuScene::update(const float dt) {
+void PauseMenuScene::update(const float dt) {
 
 }
 
-void MainMenuScene::handleInput() {
+void PauseMenuScene::handleInput() {
+	bool must_break = false;
 	sf::Event event;
 
 	while (game->window.pollEvent(event)) {
@@ -32,7 +32,7 @@ void MainMenuScene::handleInput() {
 			}
 			case sf::Event::Resized: {
 				view.setSize(event.size.width, event.size.height);
-				
+
 				game->background.setPosition(game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
 				game->background.setScale(
 					float(event.size.width / float(game->background.getTexture()->getSize().x)),
@@ -42,18 +42,16 @@ void MainMenuScene::handleInput() {
 			}
 			case sf::Event::KeyPressed: {
 				if (event.key.code == sf::Keyboard::Escape) {
-					game->window.close();
-				}
-				else if (event.key.code == sf::Keyboard::Space) {
-					loadGame();
+					returnToGame();
+					must_break = true;
 				}
 			}
-			default: break;
 		}
+		if (must_break) { break; }
 	}
 }
 
-void MainMenuScene::loadGame() {
-	game->pushScene(new GameScene(game));
+void PauseMenuScene::returnToGame() {
+	game->popScene();
 	std::cout << "Game" << std::endl;
 }

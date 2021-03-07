@@ -1,9 +1,4 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <iostream>
-#include <algorithm>
-#include "Config.h"
 #include "Game.h"
 
 class Scene {
@@ -22,13 +17,13 @@ class Scene {
 
 		//virtual void playMusic(bool loop, float volume);
 
+		Game* game;
+
 		virtual void draw(const float dt) = 0;
 
 		virtual void update(const float dt) = 0;
 
 		virtual void handleInput() = 0;
-
-		Game* game;
 		
 		//Scene(std::string sceneName_, std::string musicString_, Config& config);
 };

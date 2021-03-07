@@ -15,6 +15,5 @@ public:
 	// Translate an id into a reference
 	sf::Texture& getRef(const std::string& texture);
 
-	TextureManager() {
-	}
+	TextureManager() {}
 };

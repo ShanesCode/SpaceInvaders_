@@ -1,21 +1,35 @@
-#include <stack>
-#include <SFML/System.hpp>
+#include "..\Headers\Game.h"
+#include "..\Headers\Scene.h"
 
-#include "../Headers/Game.h"
-#include "../Headers/Scene.h"
+// Constructor
+Game::Game(Config& config) {
+	loadTextures();
 
+	window.create(sf::VideoMode(config.screenWidth, config.screenHeight), "Space Invaders_");
+	window.setFramerateLimit(60);
 
+	background.setTexture(textureManager.getRef("background"));
+}
+
+// Destructor
+Game::~Game() {
+	while (!scenes.empty()) {
+		popScene();
+	}
+}
+
+// Public Functions
 void Game::pushScene(Scene* scene) {
-	this->scenes.push(scene);
+	scenes.push(scene);
 }
 
 void Game::popScene() {
-	delete this->scenes.top();
-	this->scenes.pop();
+	delete scenes.top();
+	scenes.pop();
 }
 
 void Game::changeScene(Scene* scene) {
-	if (!this->scenes.empty()) {
+	if (!scenes.empty()) {
 		popScene();
 	}
 	else {
@@ -24,18 +38,18 @@ void Game::changeScene(Scene* scene) {
 }
 
 Scene* Game::peekScene() {
-	if (this->scenes.empty()) {
+	if (scenes.empty()) {
 		return nullptr;
 	}
 	else {
-		return this->scenes.top();
+		return scenes.top();
 	}
 }
 
 void Game::gameLoop() {
 	sf::Clock clock;
 
-	while (this->window.isOpen())
+	while (window.isOpen())
 	{
 		sf::Time elapsed = clock.restart();
 		float dt = elapsed.asSeconds();
@@ -43,27 +57,20 @@ void Game::gameLoop() {
 		if (peekScene() == nullptr) continue;
 		peekScene()->handleInput();
 		peekScene()->update(dt);
-		this->window.clear(sf::Color::Black);
+		window.clear(sf::Color::Black);
 		peekScene()->draw(dt);
-		this->window.display();
-	}
-}
-
-Game::Game(Config& config) {
-	this->loadTextures();
-
-	this->window.create(sf::VideoMode(config.screenWidth, config.screenHeight), "Space Invaders_");
-	this->window.setFramerateLimit(60);
-
-	this->background.setTexture(this->textureManager.getRef("background"));
-}
-
-Game::~Game() {
-	while (!this->scenes.empty()) {
-		popScene();
+		window.display();
 	}
 }
 
 void Game::loadTextures() {
 	textureManager.loadTexture("background", "Resource/Space_Invaders_flyer,_1978.jpg");
+}
+
+void Game::loadSounds() {
+	// audioManager.loadSound("background", "Resource/Space_Invaders_flyer,_1978.jpg");
+}
+
+void Game::loadFonts() {
+	//textManager.loadFont();
 }

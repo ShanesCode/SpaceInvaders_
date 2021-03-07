@@ -1,22 +1,28 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <stack>
 #include "Config.h"
 #include "TextureManager.h"
+#include "AudioManager.h"
+#include "TextManager.h"
 
 class Scene;
 
 class Game {
 	private:
 		void loadTextures();
+		void loadSounds();
+		void loadFonts();
 
 	public:
 		std::stack<Scene*> scenes;
 
 		sf::RenderWindow window;
-		TextureManager textureManager;
 		sf::Sprite background;
+
+		AudioManager audioManager;
+		TextureManager textureManager;
+		TextManager textManager;
 
 		void pushScene(Scene* scene);
 		void popScene();
