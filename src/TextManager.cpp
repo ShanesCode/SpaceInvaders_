@@ -2,7 +2,7 @@
 
 void TextManager::createText(const std::string& name, const std::string& fontName, int size, sf::Color color, std::string string, float xpos, float ypos) {
 	sf::Text text;
-	sf::Font font = getFontRef(fontName);
+	sf::Font font = fontManager.getFontRef(fontName);
 
 	text.setFont(font);
 	text.setCharacterSize(size);
@@ -16,7 +16,7 @@ void TextManager::createText(const std::string& name, const std::string& fontNam
 
 void TextManager::updateText(const std::string& textName, const std::string& fontName, int size, sf::Color color, std::string string, float xpos, float ypos) {
 	sf::Text text = getTextRef(textName);
-	sf::Font font = getFontRef(fontName);
+	sf::Font font = fontManager.getFontRef(fontName);
 	
 	text.setFont(font);
 	text.setCharacterSize(size);
@@ -27,17 +27,5 @@ void TextManager::updateText(const std::string& textName, const std::string& fon
 
 sf::Text& TextManager::getTextRef(const std::string& text) {
 	return texts.at(text);
-}
-
-void TextManager::loadFont(const std::string& name, const std::string& filename) {
-	// Load the texture
-	sf::Font font;
-	font.loadFromFile(filename);
-
-	fonts[name] = font;
-}
-
-sf::Font& TextManager::getFontRef(const std::string& font) {
-	return fonts.at(font);
 }
 

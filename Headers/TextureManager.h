@@ -5,7 +5,7 @@
 
 class TextureManager {
 private:
-	// Array of textures
+	// Map of textures
 	std::map<std::string, sf::Texture> textures;
 
 public:
@@ -14,6 +14,4 @@ public:
 
 	// Translate an id into a reference
 	sf::Texture& getRef(const std::string& texture);
-
-	TextureManager() {}
 };
