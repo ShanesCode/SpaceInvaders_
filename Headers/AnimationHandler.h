@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Animation.h"
 #include <vector>
+#include "Animation.h"
 
 class AnimationHandler {
 private:
