@@ -24,6 +24,7 @@ class Game {
 		TextureManager textureManager;
 		FontManager fontManager;
 		TextManager textManager;
+		Config* config;
 
 		void pushScene(Scene* scene);
 		void popScene();
@@ -32,7 +33,7 @@ class Game {
 
 		void gameLoop();
 
-		Game(Config& config);
+		Game(Config* config_);
 
 		~Game();
 };

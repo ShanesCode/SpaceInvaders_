@@ -17,4 +17,4 @@ public:
 	void updateConfig(const std::string& configFileName, const std::string& key);
 };
 
-extern const Config config;
+//extern const Config config;

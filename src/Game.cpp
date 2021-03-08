@@ -2,10 +2,12 @@
 #include "..\Headers\Scene.h"
 
 // Constructor
-Game::Game(Config& config) {
+Game::Game(Config* config_) : textManager(&fontManager) {
+	config = config_;
 	loadTextures();
+	loadFonts();
 
-	window.create(sf::VideoMode(config.screenWidth, config.screenHeight), "Space Invaders_");
+	window.create(sf::VideoMode(config->screenWidth, config->screenHeight), "Space Invaders_");
 	window.setFramerateLimit(60);
 
 	background.setTexture(textureManager.getRef("background"));
