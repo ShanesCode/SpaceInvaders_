@@ -8,6 +8,8 @@ MainMenuScene::MainMenuScene(Game* game_) {
 	pos *= 0.5f;
 	view.setCenter(pos);
 	std::cout << "MainMenu" << std::endl;
+
+	game->textManager.createText("test", "title", 108, sf::Color::Color(254, 51, 47, 150), "TEST HEHEH", game->config->screenWidth / 2, (game->config->screenHeight / 4));
 }
 
 void MainMenuScene::draw(const float dt) {
@@ -15,6 +17,8 @@ void MainMenuScene::draw(const float dt) {
 
 	game->window.clear(sf::Color::Black);
 	game->window.draw(game->background);
+	sf::Text text = game->textManager.getTextRef("test");
+	game->window.draw(text);
 }
 
 void MainMenuScene::update(const float dt) {
