@@ -1,7 +1,8 @@
 #include "..\Headers\MainMenuScene.h"
 
 // Constructor
-MainMenuScene::MainMenuScene(Game* game_) {
+MainMenuScene::MainMenuScene(Game* game_) : menuIndex(0) 
+{
 	game = game_;
 	sf::Vector2f pos = sf::Vector2f(game->window.getSize());
 	view.setSize(pos);
@@ -11,6 +12,8 @@ MainMenuScene::MainMenuScene(Game* game_) {
 
 	createTitleText();
 	createMenuText();
+
+	selectedTextIndex = menuIndex;
 }
 
 void MainMenuScene::draw(const float dt) {
@@ -103,11 +106,27 @@ void MainMenuScene::drawTitleText() {
 }
 
 void MainMenuScene::createMenuText() {
-	float title_offset = 108.0f;
-	float shadow_offset = 10.0f;
-	int fontSize = 108;
-	sf::Color fontColor2 = sf::Color::Color(254, 51, 47, 150);
-	sf::Color fontColor1 = sf::Color::Color(248, 88, 66, 200);
+	float text_offset = 54.0f;
+	int fontSize = 36;
+	sf::Color fontColor = sf::Color::White;
+
+	//	float menu_text_offset = 54.0f;
+
+	game->textManager.createText("startText", "standard", fontSize, fontColor, "START", game->config->screenWidth / 2, game->config->screenHeight / 2);
+	sf::Text* startText = &(game->textManager.getTextRef("startText"));
+	menuTextVec.push_back(startText);
+
+	game->textManager.createText("hiscoresText", "standard", fontSize, fontColor, "HISCORES", game->config->screenWidth / 2, (startText->getPosition().y + text_offset));
+	sf::Text* hiscoresText = &(game->textManager.getTextRef("hiscoresText"));
+	menuTextVec.push_back(hiscoresText);
+
+	game->textManager.createText("optionsText", "standard", fontSize, fontColor, "OPTIONS", game->config->screenWidth / 2, (hiscoresText->getPosition().y + text_offset));
+	sf::Text* optionsText = &(game->textManager.getTextRef("optionsText"));
+	menuTextVec.push_back(optionsText);
+
+	game->textManager.createText("quitText", "standard", fontSize, fontColor, "QUIT", game->config->screenWidth / 2, (optionsText->getPosition().y + text_offset));
+	sf::Text* quitText = &(game->textManager.getTextRef("quitText"));
+	menuTextVec.push_back(quitText);
 }
 
 void MainMenuScene::drawMenuText() {
@@ -115,3 +134,31 @@ void MainMenuScene::drawMenuText() {
 		game->window.draw(*menuTextVec[i]);
 	}
 }
+
+//void MainMenuScene::navigateMenu(bool downwards) {
+//	// Set currently selected text to white
+//	game->textManager.updateTextColor(textRefName, sf::Color::White);
+//	
+//	if (downwards) {
+//	// Navigate downwards
+//		if (selectedTextIndex == menuIndex) {
+//			// Prevent out of vector
+//			selectedTextIndex = textVector.size() - 1;
+//		}
+//		else {
+//			selectedTextIndex--;
+//		}
+//	}
+//	else {
+//	// Navigate upwards
+//		if (selectedTextIndex == textVector.size() - 1) {
+//			// Prevent out of vector
+//			selectedTextIndex = menuIndex;
+//		}
+//		else {
+//			selectedTextIndex++;
+//		}
+//	}
+//	// Set new selected text to green
+//	game->textManager.updateTextColor(textRefName, sf::Color::White);
+//}

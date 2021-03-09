@@ -15,6 +15,10 @@ private:
 	void drawTitleText();
 	void createMenuText();
 	void drawMenuText();
+	void navigateMenu(bool downwards);
+
+	int selectedTextIndex;
+	const int menuIndex;
 
 public:
 	virtual void draw(const float dt);
