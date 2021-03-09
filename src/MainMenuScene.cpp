@@ -9,16 +9,17 @@ MainMenuScene::MainMenuScene(Game* game_) {
 	view.setCenter(pos);
 	std::cout << "MainMenu" << std::endl;
 
-	game->textManager.createText("test", "title", 108, sf::Color::Color(254, 51, 47, 150), "TEST HEHEH", game->config->screenWidth / 2, (game->config->screenHeight / 4));
+	createTitleText();
+	createMenuText();
 }
 
 void MainMenuScene::draw(const float dt) {
 	game->window.setView(view);
 
 	game->window.clear(sf::Color::Black);
-	game->window.draw(game->background);
-	sf::Text text = game->textManager.getTextRef("test");
-	game->window.draw(text);
+	//game->window.draw(game->background);
+	drawTitleText();
+	drawMenuText();
 }
 
 void MainMenuScene::update(const float dt) {
@@ -60,4 +61,57 @@ void MainMenuScene::handleInput() {
 void MainMenuScene::loadGame() {
 	game->pushScene(new GameScene(game));
 	std::cout << "Game" << std::endl;
+}
+
+void MainMenuScene::createTitleText() {
+	float title_offset = 108.0f;
+	float shadow_offset = 10.0f;
+	int fontSize = 108;
+	sf::Color fontColor2 = sf::Color::Color(254, 51, 47, 150);
+	sf::Color fontColor1 = sf::Color::Color(248, 88, 66, 200);
+	sf::Color fontColor = sf::Color::Yellow;
+
+	game->textManager.createText("spaceTextShadow2", "title", fontSize, fontColor2, "SPACE", game->config->screenWidth / 2, (game->config->screenHeight / 4) - (title_offset / 2));
+	sf::Text* spaceTextShadow2 = &(game->textManager.getTextRef("spaceTextShadow2"));
+	titleTextVec.push_back(spaceTextShadow2);
+
+	game->textManager.createText("invadersTextShadow2", "title", fontSize, fontColor2, "INVADERS", game->config->screenWidth / 2, (game->config->screenHeight / 4) + (title_offset / 2));
+	sf::Text* invadersTextShadow2 = &(game->textManager.getTextRef("invadersTextShadow2"));
+	titleTextVec.push_back(invadersTextShadow2);
+	
+	game->textManager.createText("spaceTextShadow1", "title", fontSize, fontColor1, "SPACE", spaceTextShadow2->getPosition().x, spaceTextShadow2->getPosition().y + shadow_offset);
+	sf::Text* spaceTextShadow1 = &(game->textManager.getTextRef("spaceTextShadow1"));
+	titleTextVec.push_back(spaceTextShadow1);
+	
+	game->textManager.createText("invadersTextShadow1", "title", fontSize, fontColor1, "INVADERS", invadersTextShadow2->getPosition().x, invadersTextShadow2->getPosition().y + shadow_offset);
+	sf::Text* invadersTextShadow1 = &(game->textManager.getTextRef("invadersTextShadow1"));
+	titleTextVec.push_back(invadersTextShadow1);
+	
+	game->textManager.createText("spaceText", "title", fontSize, fontColor, "SPACE", spaceTextShadow1->getPosition().x, spaceTextShadow1->getPosition().y + shadow_offset);
+	sf::Text* spaceText = &(game->textManager.getTextRef("spaceText"));
+	titleTextVec.push_back(spaceText);
+	
+	game->textManager.createText("invadersText", "title", fontSize, fontColor, "INVADERS", invadersTextShadow1->getPosition().x, invadersTextShadow1->getPosition().y + shadow_offset);
+	sf::Text* invadersText = &(game->textManager.getTextRef("invadersText"));
+	titleTextVec.push_back(invadersText);
+}
+
+void MainMenuScene::drawTitleText() {
+	for (int i = 0; i < titleTextVec.size(); i++) {
+		game->window.draw(*titleTextVec[i]);
+	}
+}
+
+void MainMenuScene::createMenuText() {
+	float title_offset = 108.0f;
+	float shadow_offset = 10.0f;
+	int fontSize = 108;
+	sf::Color fontColor2 = sf::Color::Color(254, 51, 47, 150);
+	sf::Color fontColor1 = sf::Color::Color(248, 88, 66, 200);
+}
+
+void MainMenuScene::drawMenuText() {
+	for (int i = 0; i < menuTextVec.size(); i++) {
+		game->window.draw(*menuTextVec[i]);
+	}
 }

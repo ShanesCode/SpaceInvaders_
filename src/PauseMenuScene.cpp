@@ -7,13 +7,18 @@ PauseMenuScene::PauseMenuScene(Game* game_) {
 	view.setSize(pos);
 	pos *= 0.5f;
 	view.setCenter(pos);
+
+	createTitleText();
+	createMenuText();
 }
 
 void PauseMenuScene::draw(const float dt) {
 	game->window.setView(view);
 
-	game->window.clear(sf::Color::Magenta);
+	game->window.clear(sf::Color::Black);
 	//game->window.draw(game->background);
+	drawTitleText();
+	drawMenuText();
 }
 
 void PauseMenuScene::update(const float dt) {
@@ -54,4 +59,32 @@ void PauseMenuScene::handleInput() {
 void PauseMenuScene::returnToGame() {
 	game->popScene();
 	std::cout << "Game" << std::endl;
+}
+
+void PauseMenuScene::createTitleText() {
+	float title_offset = 108.0f;
+	int fontSize = 72;
+	sf::Color fontColor = sf::Color::Color(165, 25, 100, 255);
+
+	game->textManager.createText("pauseText", "title", fontSize, fontColor, "PAUSE", game->config->screenWidth / 2, (game->config->screenHeight / 4) - (title_offset / 2));
+	sf::Text* pauseText = &(game->textManager.getTextRef("pauseText"));
+	titleTextVec.push_back(pauseText);
+}
+
+void PauseMenuScene::drawTitleText() {
+	for (int i = 0; i < titleTextVec.size(); i++) {
+		game->window.draw(*titleTextVec[i]);
+	}
+}
+
+void PauseMenuScene::createMenuText() {
+	float title_offset = 108.0f;
+	int fontSize = 72;
+	sf::Color fontColor = sf::Color::Color(165, 25, 100, 255);
+}
+
+void PauseMenuScene::drawMenuText() {
+	for (int i = 0; i < menuTextVec.size(); i++) {
+		game->window.draw(*menuTextVec[i]);
+	}
 }
