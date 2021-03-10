@@ -19,6 +19,7 @@ private:
 	void createMenuText();
 	void drawMenuText();
 	void navigateMenu(bool downwards);
+	void selectMenuItem();
 
 	int selectedTextIndex;
 	const int menuIndex;

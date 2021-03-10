@@ -171,3 +171,19 @@ void MainMenuScene::navigateMenu(bool downwards) {
 	// Set new selected text to green
 	game->textManager.updateTextColor(menuTextRefsVec[selectedTextIndex], selectedFontColor);
 }
+
+void MainMenuScene::selectMenuItem() {
+	switch (selectedTextIndex) {
+	case 0:
+		// move to gameScene
+		break;
+	case 1:
+		// move to hiscores scene
+		break;
+	case 2:
+		// move to options scene
+		break;
+	case 3:
+		// quit game
+		break;
+}
