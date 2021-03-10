@@ -8,8 +8,11 @@ private:
 	sf::View view;
 	void loadGame();
 
-	std::vector<sf::Text*> titleTextVec;
-	std::vector<sf::Text*> menuTextVec;
+	sf::Color unselectedFontColor;
+	sf::Color selectedFontColor;
+
+	std::vector<std::string> titleTextRefsVec;
+	std::vector<std::string> menuTextRefsVec;
 
 	void createTitleText();
 	void drawTitleText();
