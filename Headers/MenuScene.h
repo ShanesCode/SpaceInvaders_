@@ -23,7 +23,7 @@ public:
 
 	int selectedTextIndex;
 
-	bool must_break;
+	bool mustBreak;
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);

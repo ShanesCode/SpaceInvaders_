@@ -8,7 +8,6 @@ class PauseMenuScene : public MenuScene {
 private:
 	void returnToPreviousScene();
 	void goToOptionsScene();
-	void goToMainMenuScene();
 
 	virtual void createTitleText();
 	virtual void createMenuText();

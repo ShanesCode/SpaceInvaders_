@@ -13,7 +13,7 @@ MenuScene::MenuScene(Game* game_) {
 
 	selectedTextIndex = 0;
 
-	must_break = false;
+	mustBreak = false;
 }
 
 void MenuScene::draw(const float dt) {
@@ -61,8 +61,8 @@ void MenuScene::handleInput() {
 		}
 		default: break;
 		}
-		// Check for must_break, goes to true when a scene is destroyed to prevent accessing deallocated memory
-		if (must_break) { break; }
+		// Check for mustBreak, goes to true when a scene is destroyed to prevent accessing deallocated memory
+		if (mustBreak) { break; }
 	}
 }
 

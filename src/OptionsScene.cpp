@@ -8,7 +8,7 @@ OptionsScene::OptionsScene(Game* game_) : MenuScene(game_) {
 
 void OptionsScene::returnToPreviousScene() {
 	game->popScene();
-	MenuScene::must_break = true;
+	MenuScene::mustBreak = true;
 }
 
 void OptionsScene::createTitleText() {

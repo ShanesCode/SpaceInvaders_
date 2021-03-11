@@ -8,7 +8,7 @@ PauseMenuScene::PauseMenuScene(Game* game_) : MenuScene(game_) {
 
 void PauseMenuScene::returnToPreviousScene() {
 	game->popScene();
-	MenuScene::must_break = true;
+	MenuScene::mustBreak = true;
 }
 
 void PauseMenuScene::goToOptionsScene() {

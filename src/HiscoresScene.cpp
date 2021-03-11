@@ -29,7 +29,7 @@ void HiscoresScene::update(const float dt) {
 }
 
 void HiscoresScene::handleInput() {
-	bool must_break = false;
+	bool mustBreak = false;
 	sf::Event event;
 
 	while (game->window.pollEvent(event)) {
@@ -45,11 +45,11 @@ void HiscoresScene::handleInput() {
 			case sf::Event::KeyPressed: {
 				if (event.key.code == sf::Keyboard::Escape) {
 					game->popScene();
-					must_break = true;
+					mustBreak = true;
 				}
 			}
 		}
-		if (must_break) { break; }
+		if (mustBreak) { break; }
 	}
 }
 
