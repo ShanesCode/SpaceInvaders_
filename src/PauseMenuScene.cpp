@@ -102,11 +102,7 @@ void PauseMenuScene::createMenuText() {
 	std::string optionsPause = "optionsPause";
 	menuTextRefsVec.push_back(optionsPause);
 
-	game->textManager.createText("menuPause", "standard", fontSize, unselectedFontColor, "MAIN MENU", game->config->screenWidth / 2, (game->textManager.getTextRef(optionsPause).getPosition().y + text_offset));
-	std::string menuPause = "menuPause";
-	menuTextRefsVec.push_back(menuPause);
-
-	game->textManager.createText("quitPause", "standard", fontSize, unselectedFontColor, "QUIT", game->config->screenWidth / 2, (game->textManager.getTextRef(menuPause).getPosition().y + text_offset));
+	game->textManager.createText("quitPause", "standard", fontSize, unselectedFontColor, "QUIT", game->config->screenWidth / 2, (game->textManager.getTextRef(optionsPause).getPosition().y + text_offset));
 	std::string quitPause = "quitPause";
 	menuTextRefsVec.push_back(quitPause);
 }
@@ -141,13 +137,9 @@ void PauseMenuScene::selectMenuItem() {
 			break;
 		case 1:
 			// move to options scene
-			returnToPreviousScene();
-			break;
-		case 2:
-			// move to main menu scene
 			goToOptionsScene();
 			break;
-		case 3:
+		case 2:
 			// quit game
 			game->window.close();
 			break;

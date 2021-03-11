@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "OptionsScene.h"
+#include "MainMenuScene.h"
 #include "Scene.h"
 
 class PauseMenuScene : public Scene {
@@ -9,6 +10,7 @@ private:
 
 	void returnToPreviousScene();
 	void goToOptionsScene();
+	void goToMainMenuScene();
 
 	sf::Color unselectedFontColor;
 	sf::Color selectedFontColor;
