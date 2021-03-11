@@ -72,7 +72,7 @@ void GameScene::createTitleText() {
 	game->textManager.createText("scoreLabelText", "standard", fontSize, fontColor, "Score:", score_x_offset, score_y_offset);
 	sf::Text* scoreLabelText = &game->textManager.getTextRef("scoreLabelText");
 	titleTextVec.push_back(scoreLabelText);
-	// UPDATE VECTORS TO TAKE POINTERS INSTEAD OF WHOLE NEW TEXT VARIABLES
+	
 	game->textManager.createText("scoreText", "standard", fontSize, fontColor, "0", scoreLabelText->getPosition().x + scoreLabelText->getLocalBounds().width + score_number_offset, scoreLabelText->getPosition().y);
 	sf::Text* scoreText = &game->textManager.getTextRef("scoreText");
 	titleTextVec.push_back(scoreText);
