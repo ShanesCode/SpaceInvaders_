@@ -3,10 +3,9 @@
 
 #include "Scene.h"
 
-class PauseMenuScene : public Scene {
+class HiscoresScene : public Scene {
 private:
 	sf::View view;
-	void returnToGame();
 
 	sf::Color unselectedFontColor;
 	sf::Color selectedFontColor;
@@ -24,5 +23,5 @@ public:
 	virtual void update(const float dt);
 	virtual void handleInput();
 
-	PauseMenuScene(Game* game_);
+	HiscoresScene(Game* game_);
 };

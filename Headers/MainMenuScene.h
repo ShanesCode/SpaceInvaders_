@@ -1,12 +1,16 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "GameScene.h"
+#include "HiscoresScene.h"
+#include "OptionsScene.h"
 #include "Scene.h"
 
 class MainMenuScene : public Scene {
 private:
 	sf::View view;
-	void loadGame();
+	void goToGameScene();
+	void goToHiscoresScene();
+	void goToOptionsScene();
 
 	sf::Color unselectedFontColor;
 	sf::Color selectedFontColor;

@@ -45,19 +45,16 @@ void MainMenuScene::handleInput() {
 			case sf::Event::Resized: {
 				view.setSize(event.size.width, event.size.height);
 				
-				game->background.setPosition(game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
+				/*game->background.setPosition(game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
 				game->background.setScale(
 					float(event.size.width / float(game->background.getTexture()->getSize().x)),
 					float(event.size.height) / float(game->background.getTexture()->getSize().y)
-				);
+				);*/
 				break;
 			}
 			case sf::Event::KeyPressed: {
-				if (event.key.code == sf::Keyboard::Escape) {
-					game->window.close();
-				}
-				else if (event.key.code == sf::Keyboard::Space) {
-					loadGame();
+				if (event.key.code == sf::Keyboard::Space || event.key.code == sf::Keyboard::Enter) {
+					selectMenuItem();
 				}
 				else if (event.key.code == sf::Keyboard::Down) {
 					navigateMenu(true);
@@ -71,9 +68,19 @@ void MainMenuScene::handleInput() {
 	}
 }
 
-void MainMenuScene::loadGame() {
+void MainMenuScene::goToGameScene() {
 	game->pushScene(new GameScene(game));
 	std::cout << "Game" << std::endl;
+}
+
+void MainMenuScene::goToHiscoresScene() {
+	game->pushScene(new HiscoresScene(game));
+	std::cout << "Hiscores" << std::endl;
+}
+
+void MainMenuScene::goToOptionsScene() {
+	game->pushScene(new OptionsScene(game));
+	std::cout << "Options" << std::endl;
 }
 
 void MainMenuScene::createTitleText() {
@@ -84,29 +91,29 @@ void MainMenuScene::createTitleText() {
 	sf::Color fontColor1 = sf::Color::Color(248, 88, 66, 200);
 	sf::Color fontColor = sf::Color::Yellow;
 
-	game->textManager.createText("spaceTextShadow2", "title", fontSize, fontColor2, "SPACE", game->config->screenWidth / 2, (game->config->screenHeight / 4) - (title_offset / 2));
-	std::string spaceTextShadow2 = "spaceTextShadow2";
-	titleTextRefsVec.push_back(spaceTextShadow2);
+	game->textManager.createText("spaceTextShadow2MainMenu", "title", fontSize, fontColor2, "SPACE", game->config->screenWidth / 2, (game->config->screenHeight / 4) - (title_offset / 2));
+	std::string spaceTextShadow2MainMenu = "spaceTextShadow2MainMenu";
+	titleTextRefsVec.push_back(spaceTextShadow2MainMenu);
 
-	game->textManager.createText("invadersTextShadow2", "title", fontSize, fontColor2, "INVADERS", game->config->screenWidth / 2, (game->config->screenHeight / 4) + (title_offset / 2));
-	std::string invadersTextShadow2 = "invadersTextShadow2";
-	titleTextRefsVec.push_back(invadersTextShadow2);
+	game->textManager.createText("invadersTextShadow2MainMenu", "title", fontSize, fontColor2, "INVADERS", game->config->screenWidth / 2, (game->config->screenHeight / 4) + (title_offset / 2));
+	std::string invadersTextShadow2MainMenu = "invadersTextShadow2MainMenu";
+	titleTextRefsVec.push_back(invadersTextShadow2MainMenu);
 	
-	game->textManager.createText("spaceTextShadow1", "title", fontSize, fontColor1, "SPACE", game->textManager.getTextRef(spaceTextShadow2).getPosition().x, (game->textManager.getTextRef(spaceTextShadow2).getPosition().y + shadow_offset));
-	std::string spaceTextShadow1 = "spaceTextShadow1";
-	titleTextRefsVec.push_back(spaceTextShadow1);
+	game->textManager.createText("spaceTextShadow1MainMenu", "title", fontSize, fontColor1, "SPACE", game->textManager.getTextRef(spaceTextShadow2MainMenu).getPosition().x, (game->textManager.getTextRef(spaceTextShadow2MainMenu).getPosition().y + shadow_offset));
+	std::string spaceTextShadow1MainMenu = "spaceTextShadow1MainMenu";
+	titleTextRefsVec.push_back(spaceTextShadow1MainMenu);
 	
-	game->textManager.createText("invadersTextShadow1", "title", fontSize, fontColor1, "INVADERS", game->textManager.getTextRef(invadersTextShadow2).getPosition().x, (game->textManager.getTextRef(invadersTextShadow2).getPosition().y + shadow_offset));
-	std::string invadersTextShadow1 = "invadersTextShadow1";
-	titleTextRefsVec.push_back(invadersTextShadow1);
+	game->textManager.createText("invadersTextShadow1MainMenu", "title", fontSize, fontColor1, "INVADERS", game->textManager.getTextRef(invadersTextShadow2MainMenu).getPosition().x, (game->textManager.getTextRef(invadersTextShadow2MainMenu).getPosition().y + shadow_offset));
+	std::string invadersTextShadow1MainMenu = "invadersTextShadow1MainMenu";
+	titleTextRefsVec.push_back(invadersTextShadow1MainMenu);
 	
-	game->textManager.createText("spaceText", "title", fontSize, fontColor, "SPACE", game->textManager.getTextRef(spaceTextShadow1).getPosition().x, (game->textManager.getTextRef(spaceTextShadow1).getPosition().y + shadow_offset));
-	std::string spaceText = "spaceText";
-	titleTextRefsVec.push_back(spaceText);
+	game->textManager.createText("spaceTextMainMenu", "title", fontSize, fontColor, "SPACE", game->textManager.getTextRef(spaceTextShadow1MainMenu).getPosition().x, (game->textManager.getTextRef(spaceTextShadow1MainMenu).getPosition().y + shadow_offset));
+	std::string spaceTextMainMenu = "spaceTextMainMenu";
+	titleTextRefsVec.push_back(spaceTextMainMenu);
 	
-	game->textManager.createText("invadersText", "title", fontSize, fontColor, "INVADERS", game->textManager.getTextRef(invadersTextShadow1).getPosition().x, (game->textManager.getTextRef(invadersTextShadow1).getPosition().y + shadow_offset));
-	std::string invadersText = "invadersText";
-	titleTextRefsVec.push_back(invadersText);
+	game->textManager.createText("invadersTextMainMenu", "title", fontSize, fontColor, "INVADERS", game->textManager.getTextRef(invadersTextShadow1MainMenu).getPosition().x, (game->textManager.getTextRef(invadersTextShadow1MainMenu).getPosition().y + shadow_offset));
+	std::string invadersTextMainMenu = "invadersTextMainMenu";
+	titleTextRefsVec.push_back(invadersTextMainMenu);
 }
 
 void MainMenuScene::drawTitleText() {
@@ -121,21 +128,21 @@ void MainMenuScene::createMenuText() {
 
 	//	float menu_text_offset = 54.0f;
 
-	game->textManager.createText("startText", "standard", fontSize, selectedFontColor, "START", game->config->screenWidth / 2, game->config->screenHeight / 2);
-	std::string startText = "startText";
-	menuTextRefsVec.push_back(startText);
+	game->textManager.createText("startMainMenu", "standard", fontSize, selectedFontColor, "START", game->config->screenWidth / 2, game->config->screenHeight / 2);
+	std::string startMainMenu = "startMainMenu";
+	menuTextRefsVec.push_back(startMainMenu);
 
-	game->textManager.createText("hiscoresText", "standard", fontSize, unselectedFontColor, "HISCORES", game->config->screenWidth / 2, (game->textManager.getTextRef(startText).getPosition().y + text_offset));
-	std::string hiscoresText = "hiscoresText";
-	menuTextRefsVec.push_back(hiscoresText);
+	game->textManager.createText("hiscoresMainMenu", "standard", fontSize, unselectedFontColor, "HISCORES", game->config->screenWidth / 2, (game->textManager.getTextRef(startMainMenu).getPosition().y + text_offset));
+	std::string hiscoresMainMenu = "hiscoresMainMenu";
+	menuTextRefsVec.push_back(hiscoresMainMenu);
 
-	game->textManager.createText("optionsText", "standard", fontSize, unselectedFontColor, "OPTIONS", game->config->screenWidth / 2, (game->textManager.getTextRef(hiscoresText).getPosition().y + text_offset));
-	std::string optionsText = "optionsText";
-	menuTextRefsVec.push_back(optionsText);
+	game->textManager.createText("optionsMainMenu", "standard", fontSize, unselectedFontColor, "OPTIONS", game->config->screenWidth / 2, (game->textManager.getTextRef(hiscoresMainMenu).getPosition().y + text_offset));
+	std::string optionsMainMenu = "optionsMainMenu";
+	menuTextRefsVec.push_back(optionsMainMenu);
 
-	game->textManager.createText("quitText", "standard", fontSize, unselectedFontColor, "QUIT", game->config->screenWidth / 2, (game->textManager.getTextRef(optionsText).getPosition().y + text_offset));
-	std::string quitText = "quitText";
-	menuTextRefsVec.push_back(quitText);
+	game->textManager.createText("quitMainMenu", "standard", fontSize, unselectedFontColor, "QUIT", game->config->screenWidth / 2, (game->textManager.getTextRef(optionsMainMenu).getPosition().y + text_offset));
+	std::string quitMainMenu = "quitMainMenu";
+	menuTextRefsVec.push_back(quitMainMenu);
 }
 
 void MainMenuScene::drawMenuText() {
@@ -175,15 +182,20 @@ void MainMenuScene::navigateMenu(bool downwards) {
 void MainMenuScene::selectMenuItem() {
 	switch (selectedTextIndex) {
 	case 0:
-		// move to gameScene
+		// move to game scene
+		goToGameScene();
 		break;
 	case 1:
 		// move to hiscores scene
+		goToHiscoresScene();
 		break;
 	case 2:
 		// move to options scene
+		goToOptionsScene();
 		break;
 	case 3:
 		// quit game
+		game->window.close();
 		break;
+	}
 }

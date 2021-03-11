@@ -1,12 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
 #include "Scene.h"
 
-class PauseMenuScene : public Scene {
+class OptionsScene : public Scene {
 private:
 	sf::View view;
-	void returnToGame();
 
 	sf::Color unselectedFontColor;
 	sf::Color selectedFontColor;
@@ -24,5 +22,5 @@ public:
 	virtual void update(const float dt);
 	virtual void handleInput();
 
-	PauseMenuScene(Game* game_);
+	OptionsScene(Game* game_);
 };

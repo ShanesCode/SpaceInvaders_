@@ -16,5 +16,3 @@ public:
 	Config(const std::string& configFileName);
 	void updateConfig(const std::string& configFileName, const std::string& key);
 };
-
-//extern const Config config;
