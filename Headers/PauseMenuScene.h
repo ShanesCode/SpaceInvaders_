@@ -1,12 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include "OptionsScene.h"
 #include "Scene.h"
 
 class PauseMenuScene : public Scene {
 private:
 	sf::View view;
-	void returnToGame();
+
+	void returnToPreviousScene();
+	void goToOptionsScene();
 
 	sf::Color unselectedFontColor;
 	sf::Color selectedFontColor;
@@ -18,6 +20,12 @@ private:
 	void drawTitleText();
 	void createMenuText();
 	void drawMenuText();
+	void navigateMenu(bool downwards);
+	void selectMenuItem();
+
+	int selectedTextIndex;
+
+	bool must_break;
 
 public:
 	virtual void draw(const float dt);

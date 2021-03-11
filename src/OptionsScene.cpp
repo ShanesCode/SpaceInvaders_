@@ -13,6 +13,10 @@ OptionsScene::OptionsScene(Game* game_) {
 
 	createTitleText();
 	createMenuText();
+
+	selectedTextIndex = 0;
+
+	must_break = false;
 }
 
 void OptionsScene::draw(const float dt) {
@@ -29,28 +33,40 @@ void OptionsScene::update(const float dt) {
 }
 
 void OptionsScene::handleInput() {
-	bool must_break = false;
 	sf::Event event;
 
 	while (game->window.pollEvent(event)) {
 		switch (event.type) {
-		case sf::Event::Closed: {
-			game->window.close();
-			break;
-		}
-		case sf::Event::Resized: {
-			view.setSize(event.size.width, event.size.height);
-			break;
-		}
-		case sf::Event::KeyPressed: {
-			if (event.key.code == sf::Keyboard::Escape) {
-				game->popScene();
-				must_break = true;
+			case sf::Event::Closed: {
+				game->window.close();
+				break;
 			}
-		}
+			case sf::Event::Resized: {
+				view.setSize(event.size.width, event.size.height);
+				break;
+			}
+			case sf::Event::KeyPressed: {
+				if (event.key.code == sf::Keyboard::Escape) {
+					returnToPreviousScene();
+				}
+				else if (event.key.code == sf::Keyboard::Space || event.key.code == sf::Keyboard::Enter) {
+					selectMenuItem();
+				}
+				else if (event.key.code == sf::Keyboard::Down) {
+					navigateMenu(true);
+				}
+				else if (event.key.code == sf::Keyboard::Up) {
+					navigateMenu(false);
+				}
+			}
 		}
 		if (must_break) { break; }
 	}
+}
+
+void OptionsScene::returnToPreviousScene() {
+	game->popScene();
+	must_break = true;
 }
 
 void OptionsScene::createTitleText() {
@@ -70,13 +86,49 @@ void OptionsScene::drawTitleText() {
 }
 
 void OptionsScene::createMenuText() {
-	float title_offset = 108.0f;
-	int fontSize = 72;
+	float text_offset = 54.0f;
+	int fontSize = 36;
 	sf::Color fontColor = sf::Color::Color(165, 25, 100, 255);
+
+	game->textManager.createText("volumeOptions", "standard", fontSize, selectedFontColor, "VOLUME", game->config->screenWidth / 2, game->config->screenHeight / 2);
+	std::string volumeOptions = "volumeOptions";
+	menuTextRefsVec.push_back(volumeOptions);
+
+	game->textManager.createText("returnOptions", "standard", fontSize, unselectedFontColor, "RETURN", game->config->screenWidth / 2, (game->textManager.getTextRef(volumeOptions).getPosition().y + text_offset));
+	std::string returnOptions = "returnOptions";
+	menuTextRefsVec.push_back(returnOptions);
 }
 
 void OptionsScene::drawMenuText() {
 	for (int i = 0; i < menuTextRefsVec.size(); i++) {
 		game->window.draw(game->textManager.getTextRef(menuTextRefsVec[i]));
+	}
+}
+
+void OptionsScene::navigateMenu(bool downwards) {
+	// Set currently selected text to white
+	game->textManager.updateTextColor(menuTextRefsVec[selectedTextIndex], unselectedFontColor);
+
+	if (!downwards) {
+		// Navigate downwards
+		selectedTextIndex = (selectedTextIndex - 1) % menuTextRefsVec.size();
+	}
+	else {
+		// Navigate upwards
+		selectedTextIndex = (selectedTextIndex + 1) % menuTextRefsVec.size();
+	}
+	// Set new selected text to green
+	game->textManager.updateTextColor(menuTextRefsVec[selectedTextIndex], selectedFontColor);
+}
+
+void OptionsScene::selectMenuItem() {
+	switch (selectedTextIndex) {
+		case 0:
+			// allow volume change
+			break;
+		case 1:
+			// move to main menu scene
+			returnToPreviousScene();
+			break;
 	}
 }

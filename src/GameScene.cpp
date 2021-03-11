@@ -60,7 +60,6 @@ void GameScene::handleInput() {
 
 void GameScene::pauseGame() {
 	game->pushScene(new PauseMenuScene(game));
-	std::cout << "PauseMenu" << std::endl;
 }
 
 void GameScene::createTitleText() {

@@ -1,8 +1,7 @@
 #include "..\Headers\MainMenuScene.h"
 
 // Constructor
-MainMenuScene::MainMenuScene(Game* game_) : menuIndex(0) 
-{
+MainMenuScene::MainMenuScene(Game* game_) {
 	game = game_;
 	sf::Vector2f pos = sf::Vector2f(game->window.getSize());
 	view.setSize(pos);
@@ -12,12 +11,10 @@ MainMenuScene::MainMenuScene(Game* game_) : menuIndex(0)
 	unselectedFontColor = sf::Color::White;
 	selectedFontColor = sf::Color::Green;
 
-	std::cout << "MainMenu" << std::endl;
-
 	createTitleText();
 	createMenuText();
 
-	selectedTextIndex = menuIndex;
+	selectedTextIndex = 0;
 }
 
 void MainMenuScene::draw(const float dt) {
@@ -70,17 +67,14 @@ void MainMenuScene::handleInput() {
 
 void MainMenuScene::goToGameScene() {
 	game->pushScene(new GameScene(game));
-	std::cout << "Game" << std::endl;
 }
 
 void MainMenuScene::goToHiscoresScene() {
 	game->pushScene(new HiscoresScene(game));
-	std::cout << "Hiscores" << std::endl;
 }
 
 void MainMenuScene::goToOptionsScene() {
 	game->pushScene(new OptionsScene(game));
-	std::cout << "Options" << std::endl;
 }
 
 void MainMenuScene::createTitleText() {
@@ -126,8 +120,6 @@ void MainMenuScene::createMenuText() {
 	float text_offset = 54.0f;
 	int fontSize = 36;
 
-	//	float menu_text_offset = 54.0f;
-
 	game->textManager.createText("startMainMenu", "standard", fontSize, selectedFontColor, "START", game->config->screenWidth / 2, game->config->screenHeight / 2);
 	std::string startMainMenu = "startMainMenu";
 	menuTextRefsVec.push_back(startMainMenu);
@@ -157,23 +149,11 @@ void MainMenuScene::navigateMenu(bool downwards) {
 	
 	if (!downwards) {
 	// Navigate downwards
-		if (selectedTextIndex == menuIndex) {
-			// Prevent out of vector
-			selectedTextIndex = menuTextRefsVec.size() - 1;
-		}
-		else {
-			selectedTextIndex--;
-		}
+		selectedTextIndex = (selectedTextIndex - 1) % menuTextRefsVec.size();
 	}
 	else {
 	// Navigate upwards
-		if (selectedTextIndex == menuTextRefsVec.size() - 1) {
-			// Prevent out of vector
-			selectedTextIndex = menuIndex;
-		}
-		else {
-			selectedTextIndex++;
-		}
+		selectedTextIndex = (selectedTextIndex + 1) % menuTextRefsVec.size();
 	}
 	// Set new selected text to green
 	game->textManager.updateTextColor(menuTextRefsVec[selectedTextIndex], selectedFontColor);
@@ -181,21 +161,21 @@ void MainMenuScene::navigateMenu(bool downwards) {
 
 void MainMenuScene::selectMenuItem() {
 	switch (selectedTextIndex) {
-	case 0:
-		// move to game scene
-		goToGameScene();
-		break;
-	case 1:
-		// move to hiscores scene
-		goToHiscoresScene();
-		break;
-	case 2:
-		// move to options scene
-		goToOptionsScene();
-		break;
-	case 3:
-		// quit game
-		game->window.close();
-		break;
-	}
+		case 0:
+			// move to game scene
+			goToGameScene();
+			break;
+		case 1:
+			// move to hiscores scene
+			goToHiscoresScene();
+			break;
+		case 2:
+			// move to options scene
+			goToOptionsScene();
+			break;
+		case 3:
+			// quit game
+			game->window.close();
+			break;
+		}
 }

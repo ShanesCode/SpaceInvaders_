@@ -34,20 +34,20 @@ void HiscoresScene::handleInput() {
 
 	while (game->window.pollEvent(event)) {
 		switch (event.type) {
-		case sf::Event::Closed: {
-			game->window.close();
-			break;
-		}
-		case sf::Event::Resized: {
-			view.setSize(event.size.width, event.size.height);
-			break;
-		}
-		case sf::Event::KeyPressed: {
-			if (event.key.code == sf::Keyboard::Escape) {
-				game->popScene();
-				must_break = true;
+			case sf::Event::Closed: {
+				game->window.close();
+				break;
 			}
-		}
+			case sf::Event::Resized: {
+				view.setSize(event.size.width, event.size.height);
+				break;
+			}
+			case sf::Event::KeyPressed: {
+				if (event.key.code == sf::Keyboard::Escape) {
+					game->popScene();
+					must_break = true;
+				}
+			}
 		}
 		if (must_break) { break; }
 	}

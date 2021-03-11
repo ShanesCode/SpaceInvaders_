@@ -26,7 +26,6 @@ private:
 	void selectMenuItem();
 
 	int selectedTextIndex;
-	const int menuIndex;
 
 public:
 	virtual void draw(const float dt);

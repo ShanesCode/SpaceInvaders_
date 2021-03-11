@@ -6,6 +6,8 @@ class OptionsScene : public Scene {
 private:
 	sf::View view;
 
+	void returnToPreviousScene();
+
 	sf::Color unselectedFontColor;
 	sf::Color selectedFontColor;
 
@@ -16,6 +18,12 @@ private:
 	void drawTitleText();
 	void createMenuText();
 	void drawMenuText();
+	void navigateMenu(bool downwards);
+	void selectMenuItem();
+
+	int selectedTextIndex;
+
+	bool must_break;
 
 public:
 	virtual void draw(const float dt);
