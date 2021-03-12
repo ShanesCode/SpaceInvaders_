@@ -70,7 +70,7 @@ void Game::loadTextures() {
 }
 
 void Game::loadSounds() {
-	// audioManager.loadSound("background", "Resource/Space_Invaders_flyer,_1978.jpg");
+	//audioManager.loadSound("titleSong", "JoeReMi Music - Title Screen Theme (chiptune).ogg");
 }
 
 void Game::loadFonts() {

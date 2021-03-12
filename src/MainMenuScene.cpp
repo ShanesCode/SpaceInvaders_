@@ -4,6 +4,7 @@
 MainMenuScene::MainMenuScene(Game* game_) : MenuScene(game_) {
 	createTitleText();
 	createMenuText();
+	playMenuMusic();
 }
 
 void MainMenuScene::goToGameScene() {
@@ -91,4 +92,9 @@ void MainMenuScene::selectMenuItem() {
 			game->window.close();
 			break;
 		}
+}
+
+void MainMenuScene::playMenuMusic() {
+	game->audioManager.stopMusic();
+	game->audioManager.playMusic(true, game->config->volume, "Resource/JoeReMi Music - Title Screen Theme (chiptune).ogg");
 }

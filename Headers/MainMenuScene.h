@@ -15,6 +15,7 @@ private:
 	virtual void createMenuText();
 	virtual void selectMenuItem();
 
+	void playMenuMusic();
 public:
 	MainMenuScene(Game* game_);
 };
