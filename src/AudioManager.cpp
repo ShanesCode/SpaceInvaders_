@@ -19,16 +19,13 @@ void AudioManager::playMusic(bool loop, float volume, std::string musicFileName)
 }
 
 void AudioManager::pauseMusic() {
-	// pause playback
 	sound.pause();
 }
 
 void AudioManager::resumeMusic() {
-	// resume playback
 	sound.play();
 }
 
 void AudioManager::stopMusic() {
-	// stop playback and rewind
 	sound.stop();
 }
