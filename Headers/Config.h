@@ -6,13 +6,18 @@
 
 class Config {
 private:
-	std::string getValFromConfigFile(const std::string& configFileName, const std::string& key);
+	std::string configFileName;
+	std::map<std::string, float> configVals;
+	std::string delimiter;
+
+	void getValsFromConfigFile();
+	void updateConfigFile();
+	void updateConfigVals();
 public:
-	const float screenWidth;
-	const float screenHeight;
-	
+	float screenWidth;
+	float screenHeight;
 	float volume;
 
 	Config(const std::string& configFileName);
-	void updateConfig(const std::string& configFileName, const std::string& key);
+	void updateConfig(std::string key, float val);
 };

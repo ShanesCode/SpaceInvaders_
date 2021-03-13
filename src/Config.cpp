@@ -1,28 +1,50 @@
 #include "..\Headers\Config.h"
 
-Config::Config(const std::string& configFileName):
-	screenWidth(std::stof(getValFromConfigFile(configFileName, "screenWidth"))),
-	screenHeight(std::stof(getValFromConfigFile(configFileName, "screenHeight"))),
-	volume(std::stof(getValFromConfigFile(configFileName, "volume")))
-{
+Config::Config(const std::string& configFileName_) {
+	configFileName = configFileName_;
+	delimiter = " = ";
+	getValsFromConfigFile();
+	updateConfigVals();
 }
 
-std::string Config::getValFromConfigFile(const std::string& configFileName, const std::string& key)
-{
-	std::string data;
+void Config::getValsFromConfigFile() {
+	std::string line;
 	std::ifstream configFile(configFileName);
+	int delim_len = delimiter.length();
 
-	while (getline(configFile, data)) {
-		// Output the text from the file
-		if (data.find(key) != std::string::npos) {
-			return data.substr(key.length() + 3);
-		}
+	while (getline(configFile, line)) {
+		std::string key = line.substr(0, line.find(delimiter));
+		std::string val = line.substr(line.find(delimiter) + delim_len, line.length());
+		configVals[key] = std::stof(val);
 	}
 
 	configFile.close();
 }
 
-void Config::updateConfig(const std::string& configFileName, const std::string& key)
-{
-	//TODO
+void Config::updateConfig(std::string key, float val) {
+	configVals[key] = val;
+	updateConfigFile();
+	updateConfigVals();
+}
+
+void Config::updateConfigFile() {
+	// For each key-val pair in configVals, write a line of text of the format: "key = val"
+	std::ofstream configFile;
+	configFile.open(configFileName, std::ios::out | std::ios::trunc);
+	std::string line;
+	std::map<std::string, float>::iterator iter = configVals.begin();
+	while (iter != configVals.end()) {
+		line = iter->first + delimiter + std::to_string(iter->second);
+		configFile << line << "\n";
+		iter++;
+	}
+
+	configFile.close();
+}
+
+void Config::updateConfigVals() {
+	getValsFromConfigFile();
+	screenWidth = configVals["screenWidth"];
+	screenHeight = configVals["screenHeight"];
+	volume = configVals["volume"];
 }
