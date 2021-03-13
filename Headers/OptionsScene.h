@@ -10,6 +10,10 @@ private:
 	virtual void createMenuText();
 	virtual void selectMenuItem();
 
+	void changeVolumeSlider(bool increase);
+
+	virtual void handleInput();
+
 public:
 	OptionsScene(Game* game_);
 };
