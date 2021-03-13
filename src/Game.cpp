@@ -69,10 +69,6 @@ void Game::loadTextures() {
 	textureManager.loadTexture("background", "Resource/Space_Invaders_flyer,_1978.jpg");
 }
 
-void Game::loadSounds() {
-	//audioManager.loadSound("titleSong", "JoeReMi Music - Title Screen Theme (chiptune).ogg");
-}
-
 void Game::loadFonts() {
 	fontManager.loadFont("title", "Resource/MachineStd-Bold.otf");
 	fontManager.loadFont("standard", "Resource/space_invaders.ttf");
