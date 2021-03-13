@@ -6,7 +6,7 @@
 
 class Config {
 private:
-	std::string getConfigFromFile(const std::string& configFileName, const std::string& key);
+	std::string getValFromConfigFile(const std::string& configFileName, const std::string& key);
 public:
 	const float screenWidth;
 	const float screenHeight;

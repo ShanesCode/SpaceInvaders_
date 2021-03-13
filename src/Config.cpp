@@ -1,13 +1,13 @@
 #include "..\Headers\Config.h"
 
 Config::Config(const std::string& configFileName):
-	screenWidth(std::stof(getConfigFromFile(configFileName, "screenWidth"))),
-	screenHeight(std::stof(getConfigFromFile(configFileName, "screenHeight"))),
-	volume(std::stof(getConfigFromFile(configFileName, "volume")))
+	screenWidth(std::stof(getValFromConfigFile(configFileName, "screenWidth"))),
+	screenHeight(std::stof(getValFromConfigFile(configFileName, "screenHeight"))),
+	volume(std::stof(getValFromConfigFile(configFileName, "volume")))
 {
 }
 
-std::string Config::getConfigFromFile(const std::string& configFileName, const std::string& key)
+std::string Config::getValFromConfigFile(const std::string& configFileName, const std::string& key)
 {
 	std::string data;
 	std::ifstream configFile(configFileName);
