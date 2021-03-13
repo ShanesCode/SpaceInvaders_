@@ -14,6 +14,9 @@ private:
 
 	virtual void handleInput();
 
+	float max_volume;
+	float min_volume;
+
 public:
 	OptionsScene(Game* game_);
 };

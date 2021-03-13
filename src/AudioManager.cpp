@@ -29,3 +29,7 @@ void AudioManager::resumeMusic() {
 void AudioManager::stopMusic() {
 	sound.stop();
 }
+
+void AudioManager::changeVolume(float vol) {
+	music.setVolume(vol);
+}

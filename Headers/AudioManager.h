@@ -21,4 +21,5 @@ public:
 	void pauseMusic();
 	void resumeMusic();
 	void stopMusic();
+	void changeVolume(float vol);
 };

@@ -4,6 +4,9 @@
 OptionsScene::OptionsScene(Game* game_) : MenuScene(game_) {
 	createTitleText();
 	createMenuText();
+
+	max_volume = 100.0f;
+	min_volume = 0.0f;
 }
 
 void OptionsScene::handleInput() {
@@ -94,12 +97,28 @@ void OptionsScene::selectMenuItem() {
 }
 
 void OptionsScene::changeVolumeSlider(bool increase) {
+	float prev_volume = game->config->volume;
 	float volume_increment = 5.0f;
+	float new_volume;
 
 	if (increase) {
-		game->config->volume + volume_increment;
+		new_volume = prev_volume + volume_increment;
+		// Prevent going over max volume
+		if (new_volume <= max_volume) {
+			// Update the config file so that the setting is saved
+			game->config->updateConfig("volume", new_volume);
+			// Change volume in audioManager
+			game->audioManager.changeVolume(new_volume);
+		}
 	}
 	else {
-		game->config->volume - volume_increment;
+		new_volume = prev_volume - volume_increment;
+		// Prevent going over max volume
+		if (new_volume >= min_volume) {
+			// Update the config file so that the setting is saved
+			game->config->updateConfig("volume", new_volume);
+			// Change volume in audioManager
+			game->audioManager.changeVolume(new_volume);
+		}
 	}
 }
