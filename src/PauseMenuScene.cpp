@@ -55,7 +55,7 @@ void PauseMenuScene::selectMenuItem() {
 			break;
 		case 2:
 			// quit game
-			game->window.close();
+			game->quit();
 			break;
 	}
 }

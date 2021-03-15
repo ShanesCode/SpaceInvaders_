@@ -35,7 +35,7 @@ void HiscoresScene::handleInput() {
 	while (game->window.pollEvent(event)) {
 		switch (event.type) {
 			case sf::Event::Closed: {
-				game->window.close();
+				game->quit();
 				break;
 			}
 			case sf::Event::Resized: {

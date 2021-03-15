@@ -32,6 +32,8 @@ class Game {
 
 		void gameLoop();
 
+		void quit();
+
 		Game(Config* config_);
 
 		~Game();

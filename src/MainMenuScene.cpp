@@ -89,7 +89,7 @@ void MainMenuScene::selectMenuItem() {
 			break;
 		case 3:
 			// quit game
-			game->window.close();
+			game->quit();
 			break;
 		}
 }
