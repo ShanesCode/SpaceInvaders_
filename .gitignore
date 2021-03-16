@@ -2,3 +2,4 @@
 **/Debug
 **/Resource
 *.vcxproj*
+config.ini

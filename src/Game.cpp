@@ -75,5 +75,6 @@ void Game::loadFonts() {
 }
 
 void Game::quit() {
+	config->updateConfigFile();
 	window.close();
 }

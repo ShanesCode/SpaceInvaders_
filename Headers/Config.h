@@ -11,7 +11,6 @@ private:
 	std::string delimiter;
 
 	void getValsFromConfigFile();
-	void updateConfigFile();
 	void updateConfigVals();
 public:
 	float screenWidth;
@@ -20,4 +19,5 @@ public:
 
 	Config(const std::string& configFileName);
 	void updateConfig(std::string key, float val);
+	void updateConfigFile();
 };

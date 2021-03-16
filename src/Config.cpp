@@ -23,7 +23,6 @@ void Config::getValsFromConfigFile() {
 
 void Config::updateConfig(std::string key, float val) {
 	configVals[key] = val;
-	updateConfigFile();
 	updateConfigVals();
 }
 
@@ -43,7 +42,6 @@ void Config::updateConfigFile() {
 }
 
 void Config::updateConfigVals() {
-	getValsFromConfigFile();
 	screenWidth = configVals["screenWidth"];
 	screenHeight = configVals["screenHeight"];
 	volume = configVals["volume"];
