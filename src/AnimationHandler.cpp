@@ -15,12 +15,12 @@ AnimationHandler::AnimationHandler(const sf::IntRect& frameSize_) {
 
 void AnimationHandler::update(const float dt) {
 	if (currentAnimation >= animations.size() || currentAnimation < 0) return;
-	float duration = animations[currentAnimation].duration;
+	float frame_duration = animations[currentAnimation].frame_duration;
 
 	// Check if the animation has progressed to a new frame and if so change to the next frame
-	if (int((time + dt) / duration) > int(time / duration)) {
+	if (int((time + dt) / frame_duration) > int(time / frame_duration)) {
 		// Calculate the frame number
-		int frame = int((time + dt) / duration);
+		int frame = int((time + dt) / frame_duration);
 		
 		// Adjust for looping
 		frame %= animations[currentAnimation].getLength();
@@ -36,7 +36,7 @@ void AnimationHandler::update(const float dt) {
 	time += dt;
 
 	// Adjust for looping
-	if (time > duration * animations[currentAnimation].getLength()) {
+	if (time > frame_duration * animations[currentAnimation].getLength()) {
 		time = 0.0f;
 	}
 }
