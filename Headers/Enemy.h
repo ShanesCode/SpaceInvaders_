@@ -2,9 +2,15 @@
 #include "Entity.h"
 class Enemy: Entity {
 	private:
-		int bulletspeed;
+		// Bool to check if this enemy is at the edge of the "block" of enemies
+		// If a sidemost hits the edge of the screen, all enemies change direction
+		bool sidemost;
+		void changeDirection();
+		void chooseShooter();
 
 	public:
-		int move();
-		int shoot();
+		virtual void move(const float dt);
+		virtual void death();
+
+		Enemy(int health_, int movespeed_, int fireRate_, float x_location_, float y_location_);
 };
