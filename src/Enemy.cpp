@@ -18,7 +18,6 @@ void Enemy::move(const float dt) {
 	}
 }
 
-<<<<<<< HEAD
 void Enemy::chooseShooter() {
 	// Choose who fires next
 }
@@ -35,12 +34,4 @@ void Enemy::death() {
 void Enemy::changeDirection() {
 	// Change direction of block
 	// For all enemies in the block, change their direction
-=======
-void Enemy::death() {
-
-}
-
-void Enemy::changeDirection() {
-
->>>>>>> f67df709f8569dae25d02a0410fb4fdf78cd3390
 }
