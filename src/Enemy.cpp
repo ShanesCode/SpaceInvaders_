@@ -1,6 +1,7 @@
 #include "../Headers/Enemy.h"
 
-Enemy::Enemy(int health_, int movespeed_, int fireRate_, float x_location_, float y_location_) {
+Enemy::Enemy(int health_, int movespeed_, int fireRate_, float x_location_, float y_location_) 
+: Entity(health_, movespeed_, fireRate_, x_location_, y_location_) {
 	health = health_;
 	movespeed = movespeed_;
 	fireRate = fireRate_;
