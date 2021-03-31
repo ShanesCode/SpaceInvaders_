@@ -3,11 +3,15 @@
 
 class EnemyHiveMind {
 private:
+	float xpos;
+	float ypos;
+	float tile_size;
+
 	bool moveRight;
-	Enemy& leftMost;
-	Enemy& rightMost;
-	std::vector<Enemy&> EnemyRow;
-	std::vector<std::vector<Enemy&>> Enemy2DArray;
+	Enemy* leftMost;
+	Enemy* rightMost;
+	std::vector<std::vector<Enemy*>> Enemy2DArray;
+	void populate(int noOfEnemiesInRow, int noOfRows);
 	void changeDirection();
 	void approach();
 	void move();
