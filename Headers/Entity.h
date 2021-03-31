@@ -8,8 +8,8 @@ class Entity {
 		sf::Sprite sprite;
 
 	public :
-		float x_location;
-		float y_location;
+		float xpos;
+		float ypos;
 		bool alive;
 		int health;
 		int movespeed;
@@ -19,5 +19,5 @@ class Entity {
 		void fire(const float dt);
 		virtual void death();
 
-		Entity(int health_, int movespeed_, int fireRate_, float x_location_, float y_location_);
+		Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_);
 };

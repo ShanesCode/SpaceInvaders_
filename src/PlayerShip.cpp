@@ -1,12 +1,12 @@
 #include "../Headers/PlayerShip.h"
 
-PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, float x_location_, float y_location_)
-	: Entity(health_, movespeed_, fireRate_, x_location_, y_location_) {
+PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_)
+	: Entity(health_, movespeed_, fireRate_, xpos_, ypos_) {
 	health = health_;
 	movespeed = movespeed_;
 	fireRate = fireRate_;
-	x_location = x_location_;
-	y_location = y_location_;
+	xpos = xpos_;
+	ypos = ypos_;
 	alive = true;
 }
 

@@ -12,5 +12,5 @@ class Enemy: Entity {
 		virtual void move(const float dt);
 		virtual void death();
 
-		Enemy(int health_, int movespeed_, int fireRate_, float x_location_, float y_location_);
+		Enemy(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_);
 };

@@ -1,11 +1,11 @@
 #include "../Headers/Entity.h"
 
-Entity::Entity(int health_, int movespeed_, int fireRate_, float x_location_, float y_location_) {
+Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_) {
 	health = health_;
 	movespeed = movespeed_;
 	fireRate = fireRate_;
-	x_location = x_location_;
-	y_location = y_location_;
+	xpos = xpos_;
+	ypos = ypos_;
 	alive = true;
 }
 
@@ -17,7 +17,7 @@ void Entity::fire(const float dt) {
 	// Only fire when ready
 	if (readyTimer <= 0) {
 		// Create projectile with velocity
-		// Bullet bullet(health, movespeed, 0, x_location, y_location + offset);
+		// Bullet bullet(health, movespeed, 0, xpos, ypos + offset);
 		readyTimer = fireRate * 60;
 	}
 
