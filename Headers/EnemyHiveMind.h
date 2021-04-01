@@ -1,6 +1,9 @@
 #pragma once
 #include "Enemy.h"
 
+// Have a y and x offset
+// Enemy types are the same for each row
+
 class EnemyHiveMind {
 private:
 	float xpos;
