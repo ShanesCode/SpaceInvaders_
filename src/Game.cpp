@@ -67,6 +67,10 @@ void Game::gameLoop() {
 
 void Game::loadTextures() {
 	textureManager.loadTexture("background", "Resource/Space_Invaders_flyer,_1978.jpg");
+	textureManager.loadTexture("alien0", "Resource/alien0.png");
+	textureManager.loadTexture("alien1", "Resource/alien1.png");
+	textureManager.loadTexture("alien2", "Resource/alien2.png");
+	textureManager.loadTexture("player", "Resource/player.png");
 }
 
 void Game::loadFonts() {
