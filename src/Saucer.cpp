@@ -2,7 +2,7 @@
 
 // Saucer is the thing that occasionally goes across the top of the screen for extra points
 Saucer::Saucer(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_)
-	: Entity(health_, movespeed_, fireRate_, xpos_, ypos_) {
+	: Entity(health_, movespeed_, fireRate_, xpos_, ypos_, textureManager) {
 	health = health_;
 	movespeed = movespeed_;
 	fireRate = fireRate_;

@@ -1,6 +1,7 @@
 #include "../Headers/Entity.h"
 
-Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_) {
+Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, TextureManager* textureManager_) {
+	textureManager = textureManager_;
 	health = health_;
 	movespeed = movespeed_;
 	fireRate = fireRate_;

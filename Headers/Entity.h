@@ -1,11 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "AnimationHandler.h"
+#include "TextureManager.h"
 
 class Entity {
-	private:
+	protected:
 		AnimationHandler animHandler;
 		sf::Sprite sprite;
+		TextureManager* textureManager;
 
 	public :
 		float xpos;
@@ -19,5 +21,5 @@ class Entity {
 		void fire(const float dt);
 		virtual void death();
 
-		Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_);
+		Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, TextureManager* textureManager_);
 };

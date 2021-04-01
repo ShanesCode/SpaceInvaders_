@@ -12,6 +12,7 @@ GameScene::GameScene(Game* game_) {
 
 	createTitleText();
 	createMenuText();
+	player = PlayerShip(1, 5, 1, 50, 500);
 }
 
 void GameScene::draw(const float dt) {
@@ -19,7 +20,7 @@ void GameScene::draw(const float dt) {
 	game->window.setView(guiView);
 
 	game->window.clear(sf::Color::Black);
-	//game->window.draw(game->background);
+	game->window.draw(*player.spritePtr);
 	drawTitleText();
 	drawMenuText();
 }

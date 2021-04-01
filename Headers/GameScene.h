@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "PauseMenuScene.h"
+#include "PlayerShip.h"
 
 class GameScene : public Scene {
 private:
@@ -16,6 +17,8 @@ private:
 	void drawTitleText();
 	void createMenuText();
 	void drawMenuText();
+
+	PlayerShip player;
 
 public:
 	virtual void draw(const float dt);
