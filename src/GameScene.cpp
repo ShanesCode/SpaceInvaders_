@@ -10,9 +10,11 @@ GameScene::GameScene(Game* game_) {
 	view.setCenter(pos);
 	guiView.setCenter(pos);
 
-	createTitleText();
-	createMenuText();
-	player = PlayerShip(1, 5, 1, 50, 500);
+	createScoreText();
+	//player = PlayerShip(1, 5, 1, 50, 500);
+
+	playable_xSpace = 90 * game->config->screenWidth;
+	playable_ySpace = 80 * game->config->screenHeight;
 }
 
 void GameScene::draw(const float dt) {
@@ -20,9 +22,8 @@ void GameScene::draw(const float dt) {
 	game->window.setView(guiView);
 
 	game->window.clear(sf::Color::Black);
-	game->window.draw(*player.spritePtr);
-	drawTitleText();
-	drawMenuText();
+	//game->window.draw(*player.spritePtr);
+	drawScoreText();
 }
 
 void GameScene::update(const float dt) {
@@ -63,7 +64,7 @@ void GameScene::pauseGame() {
 	game->pushScene(new PauseMenuScene(game));
 }
 
-void GameScene::createTitleText() {
+void GameScene::createScoreText() {
 	float score_x_offset = 72.0f;
 	float score_y_offset = 18.0f;
 	float score_number_offset = 10.0f;
@@ -72,25 +73,26 @@ void GameScene::createTitleText() {
 
 	game->textManager.createText("scoreLabelText", "standard", fontSize, fontColor, "Score:", score_x_offset, score_y_offset);
 	sf::Text* scoreLabelText = &game->textManager.getTextRef("scoreLabelText");
-	titleTextVec.push_back(scoreLabelText);
+	scoreTextVec.push_back(scoreLabelText);
 	
 	game->textManager.createText("scoreText", "standard", fontSize, fontColor, "0", scoreLabelText->getPosition().x + scoreLabelText->getLocalBounds().width + score_number_offset, scoreLabelText->getPosition().y);
 	sf::Text* scoreText = &game->textManager.getTextRef("scoreText");
-	titleTextVec.push_back(scoreText);
+	scoreTextVec.push_back(scoreText);
 }
 
-void GameScene::drawTitleText() {
-	for (int i = 0; i < titleTextVec.size(); i++) {
-		game->window.draw(*titleTextVec[i]);
+void GameScene::drawScoreText() {
+	for (int i = 0; i < scoreTextVec.size(); i++) {
+		game->window.draw(*scoreTextVec[i]);
 	}
 }
 
-void GameScene::createMenuText() {
-
+void GameScene::InitSprites() {
+	/*player.spritePtr->setTexture(game->textureManager.getRef("player"));
+	player.spritePtr->setScale(sf::Vector2f(2.0f, 2.0f));
+	int player_xpos = game->config->screenWidth / 2 + player.spritePtr->getLocalBounds().width / 2 * player.spritePtr->getScale().x;
+	int player_ypos = playable_ySpace - player.spritePtr->getLocalBounds().height / 2 * player.spritePtr->getScale().y;*/
 }
 
-void GameScene::drawMenuText() {
-	for (int i = 0; i < menuTextVec.size(); i++) {
-		game->window.draw(*menuTextVec[i]);
-	}
+void GameScene::updatePlayerPos() {
+
 }

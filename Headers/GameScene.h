@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "PauseMenuScene.h"
-#include "PlayerShip.h"
+//#include "PlayerShip.h"
 
 class GameScene : public Scene {
 private:
@@ -10,15 +10,19 @@ private:
 
 	void pauseGame();
 
-	std::vector<sf::Text*> titleTextVec;
-	std::vector<sf::Text*> menuTextVec;
+	std::vector<sf::Text*> scoreTextVec;
+	void createScoreText();
+	void drawScoreText();
 
-	void createTitleText();
-	void drawTitleText();
-	void createMenuText();
-	void drawMenuText();
+	//PlayerShip player;
 
-	PlayerShip player;
+	// Percentage of the window the play area should take up
+	int playable_ySpace;
+	int playable_xSpace;
+
+	void InitSprites();
+
+	void updatePlayerPos();
 
 public:
 	virtual void draw(const float dt);
