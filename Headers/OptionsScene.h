@@ -10,6 +10,12 @@ private:
 	virtual void createMenuText();
 	virtual void selectMenuItem();
 
+	virtual void draw(const float dt);
+
+	sf::Sprite sliderBG;
+	sf::Sprite slider;
+	void initSliderGraphics();
+	void updateSliderGraphic();
 	void changeVolumeSlider(bool increase);
 
 	virtual void handleInput();
