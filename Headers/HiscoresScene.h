@@ -19,9 +19,9 @@ private:
 	void drawMenuText();
 
 public:
-	virtual void draw(const float dt);
-	virtual void update(const float dt);
-	virtual void handleInput();
+	void draw(const float dt) override;
+	void update(const float dt) override;
+	void handleInput() override;
 
 	HiscoresScene(Game* game_);
 };

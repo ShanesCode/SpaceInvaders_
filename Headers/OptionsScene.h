@@ -6,11 +6,11 @@ class OptionsScene : public MenuScene {
 private:
 	void returnToPreviousScene();
 
-	virtual void createTitleText();
-	virtual void createMenuText();
-	virtual void selectMenuItem();
+	void createTitleText() override;
+	void createMenuText() override;
+	void selectMenuItem() override;
 
-	virtual void draw(const float dt);
+	void draw(const float dt) override;
 
 	sf::Sprite sliderBG;
 	sf::Sprite slider;
@@ -18,7 +18,7 @@ private:
 	void updateSliderGraphic();
 	void changeVolumeSlider(bool increase);
 
-	virtual void handleInput();
+	void handleInput() override;
 
 	float max_volume;
 	float min_volume;

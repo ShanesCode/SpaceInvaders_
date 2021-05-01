@@ -11,9 +11,9 @@ private:
 	void goToHiscoresScene();
 	void goToOptionsScene();
 
-	virtual void createTitleText();
-	virtual void createMenuText();
-	virtual void selectMenuItem();
+	void createTitleText() override;
+	void createMenuText() override;
+	void selectMenuItem() override;
 
 	void playMenuMusic();
 public:

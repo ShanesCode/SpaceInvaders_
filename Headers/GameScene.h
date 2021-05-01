@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "PauseMenuScene.h"
-//#include "PlayerShip.h"
+#include "PlayerShip.h"
 
 class GameScene : public Scene {
 private:
@@ -14,7 +14,7 @@ private:
 	void createScoreText();
 	void drawScoreText();
 
-	//PlayerShip player;
+	PlayerShip player;
 
 	// Percentage of the window the play area should take up
 	int playable_ySpace;
@@ -25,9 +25,9 @@ private:
 	void updatePlayerPos();
 
 public:
-	virtual void draw(const float dt);
-	virtual void update(const float dt);
-	virtual void handleInput();
+	void draw(const float dt) override;
+	void update(const float dt) override;
+	void handleInput() override;
 
 	GameScene(Game* game_);
 };
