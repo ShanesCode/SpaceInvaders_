@@ -28,7 +28,9 @@ void GameScene::draw(const float dt) {
 }
 
 void GameScene::update(const float dt) {
-
+	if (move_player) {
+		player.move(dt, move_player_right);
+	}
 }
 
 void GameScene::handleInput() {
@@ -54,6 +56,25 @@ void GameScene::handleInput() {
 		case sf::Event::KeyPressed: {
 			if (event.key.code == sf::Keyboard::Escape) {
 				pauseGame();
+			}
+
+			if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Right) {
+				move_player = true;
+				if (event.key.code == sf::Keyboard::Left) {
+					move_player_right = false;
+				}
+				else if (event.key.code == sf::Keyboard::Right) {
+					move_player_right = true;
+				}
+			}
+			break;
+		}
+		case sf::Event::KeyReleased: {
+			if (event.key.code == sf::Keyboard::Left && !move_player_right) {
+				move_player = false;
+			}
+			else if (event.key.code == sf::Keyboard::Right && move_player_right) {
+				move_player = false;
 			}
 		}
 		default: break;
@@ -88,12 +109,11 @@ void GameScene::drawScoreText() {
 }
 
 void GameScene::InitSprites() {
-	player = PlayerShip(1, 5, 1, 50, 500, game);
+	player = PlayerShip(1, 50, 1, 50, 500, game);
 	player.sprite.setScale(sf::Vector2f(2.0f, 2.0f));
 	int player_xpos = game->config->screenWidth / 2 + player.sprite.getLocalBounds().width / 2 * player.sprite.getScale().x;
 	int player_ypos = playable_ySpace - player.sprite.getLocalBounds().height / 2 * player.sprite.getScale().y;
-	//player.setPosition(player_xpos, player_ypos);
-	player.sprite.setPosition(sf::Vector2f(player_xpos, player_ypos));
+	player.setPosition(player_xpos, player_ypos);
 }
 
 void GameScene::updatePlayerPos() {

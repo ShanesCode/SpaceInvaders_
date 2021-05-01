@@ -12,11 +12,19 @@ PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, float xpos_, 
 	if (game != nullptr) {
 		sprite.setTexture(game->textureManager.getRef("player"));
 	}
+	setPosition(xpos, ypos);
 }
 
-void PlayerShip::move(const float dt) {
-	// Move horizontally of block
+void PlayerShip::move(const float dt, bool move_right) {
+	// Move horizontally
+	if (move_right) {
+		xpos += movespeed * dt;
+	}
+	else {
+		xpos -= movespeed * dt;
+	}
 
+	setPosition(xpos, ypos);
 }
 
 void PlayerShip::death() {

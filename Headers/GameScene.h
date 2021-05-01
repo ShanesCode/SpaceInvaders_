@@ -15,6 +15,8 @@ private:
 	void drawScoreText();
 
 	PlayerShip player;
+	bool move_player;
+	bool move_player_right;
 
 	// Percentage of the window the play area should take up
 	int playable_ySpace;

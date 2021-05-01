@@ -19,6 +19,8 @@ class Entity {
 		sf::Sprite sprite;
 
 		virtual void move(const float dt);
+		virtual void move(const float dt, bool move_right);
+
 		void fire(const float dt);
 		virtual void death();
 		

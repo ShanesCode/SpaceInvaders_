@@ -11,6 +11,7 @@ Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float yp
 }
 
 void Entity::move(const float dt) {}
+void Entity::move(const float dt, bool moveRight) {}
 
 void Entity::fire(const float dt) {
 	int readyTimer = 0;
