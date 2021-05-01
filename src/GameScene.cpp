@@ -11,10 +11,11 @@ GameScene::GameScene(Game* game_) {
 	guiView.setCenter(pos);
 
 	createScoreText();
-	//player = PlayerShip(1, 5, 1, 50, 500);
 
-	playable_xSpace = 90 * game->config->screenWidth;
-	playable_ySpace = 80 * game->config->screenHeight;
+	playable_xSpace = 0.9f * game->config->screenWidth;
+	playable_ySpace = 0.8f * game->config->screenHeight;
+
+	InitSprites();
 }
 
 void GameScene::draw(const float dt) {
@@ -22,7 +23,7 @@ void GameScene::draw(const float dt) {
 	game->window.setView(guiView);
 
 	game->window.clear(sf::Color::Black);
-	//game->window.draw(*player.spritePtr);
+	game->window.draw(player.sprite);
 	drawScoreText();
 }
 
@@ -87,10 +88,12 @@ void GameScene::drawScoreText() {
 }
 
 void GameScene::InitSprites() {
-	/*player.spritePtr->setTexture(game->textureManager.getRef("player"));
-	player.spritePtr->setScale(sf::Vector2f(2.0f, 2.0f));
-	int player_xpos = game->config->screenWidth / 2 + player.spritePtr->getLocalBounds().width / 2 * player.spritePtr->getScale().x;
-	int player_ypos = playable_ySpace - player.spritePtr->getLocalBounds().height / 2 * player.spritePtr->getScale().y;*/
+	player = PlayerShip(1, 5, 1, 50, 500, game);
+	player.sprite.setScale(sf::Vector2f(2.0f, 2.0f));
+	int player_xpos = game->config->screenWidth / 2 + player.sprite.getLocalBounds().width / 2 * player.sprite.getScale().x;
+	int player_ypos = playable_ySpace - player.sprite.getLocalBounds().height / 2 * player.sprite.getScale().y;
+	//player.setPosition(player_xpos, player_ypos);
+	player.sprite.setPosition(sf::Vector2f(player_xpos, player_ypos));
 }
 
 void GameScene::updatePlayerPos() {

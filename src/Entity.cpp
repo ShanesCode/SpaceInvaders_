@@ -30,7 +30,12 @@ void Entity::fire(const float dt) {
 
 void Entity::death() {}
 
+void Entity::setPosition() {
+	sprite.setPosition(sf::Vector2f(xpos, ypos));
+}
+
 void Entity::setPosition(float x, float y) {
 	xpos = x;
 	ypos = y;
+	sprite.setPosition(sf::Vector2f(xpos, ypos));
 }
