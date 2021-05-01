@@ -1,7 +1,7 @@
 #include "../Headers/Enemy.h"
 
-Enemy::Enemy(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_)
-: Entity(health_, movespeed_, fireRate_, xpos_, ypos_, textureManager) {
+Enemy::Enemy(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, Game* game_)
+: Entity(health_, movespeed_, fireRate_, xpos_, ypos_, game_) {
 	sidemost = false;
 	health = health_;
 	movespeed = movespeed_;

@@ -2,12 +2,13 @@
 #include <SFML/Graphics.hpp>
 #include "AnimationHandler.h"
 #include "TextureManager.h"
+#include "Game.h"
 
 class Entity {
 	protected:
 		AnimationHandler animHandler;
 		sf::Sprite sprite;
-		TextureManager* textureManager;
+		Game* game;
 
 	public :
 		float xpos;
@@ -20,6 +21,7 @@ class Entity {
 		virtual void move(const float dt);
 		void fire(const float dt);
 		virtual void death();
+		void setPosition(float x, float y);
 
-		Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, TextureManager* textureManager_);
+		Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, Game* game_);
 };

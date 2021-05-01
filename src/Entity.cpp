@@ -1,7 +1,7 @@
 #include "../Headers/Entity.h"
 
-Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, TextureManager* textureManager_) {
-	textureManager = textureManager_;
+Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, Game* game_) {
+	game = game_;
 	health = health_;
 	movespeed = movespeed_;
 	fireRate = fireRate_;
@@ -29,3 +29,8 @@ void Entity::fire(const float dt) {
 }
 
 void Entity::death() {}
+
+void Entity::setPosition(float x, float y) {
+	xpos = x;
+	ypos = y;
+}
