@@ -7,7 +7,6 @@
 class Entity {
 	protected:
 		AnimationHandler animHandler;
-		sf::Sprite sprite;
 		Game* game;
 
 	public :
@@ -17,6 +16,7 @@ class Entity {
 		int health;
 		int movespeed;
 		int fireRate;
+		sf::Sprite sprite;
 
 		virtual void move(const float dt);
 		void fire(const float dt);
