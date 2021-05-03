@@ -17,14 +17,20 @@ private:
 	PlayerShip player;
 	bool move_player;
 	bool move_player_right;
+	int player_width;
+	int player_height;
 
 	// Percentage of the window the play area should take up
 	int playable_ySpace;
+	int playable_yMin;
+	int playable_yMax;
 	int playable_xSpace;
+	int playable_xMin;
+	int playable_xMax;
 
 	void InitSprites();
 
-	void updatePlayerPos();
+	void updatePlayerPos(const float dt);
 
 public:
 	void draw(const float dt) override;

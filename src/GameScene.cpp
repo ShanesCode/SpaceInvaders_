@@ -12,8 +12,12 @@ GameScene::GameScene(Game* game_) {
 
 	createScoreText();
 
-	playable_xSpace = 0.9f * game->config->screenWidth;
 	playable_ySpace = 0.8f * game->config->screenHeight;
+	playable_yMin = game->config->screenHeight / 2 - playable_ySpace / 2;
+	playable_yMax = game->config->screenHeight / 2 + playable_ySpace / 2;
+	playable_xSpace = 0.9f * game->config->screenWidth;
+	playable_xMin = game->config->screenWidth / 2 - playable_xSpace / 2;
+	playable_xMax = game->config->screenWidth / 2 + playable_xSpace / 2;
 
 	InitSprites();
 }
@@ -29,7 +33,7 @@ void GameScene::draw(const float dt) {
 
 void GameScene::update(const float dt) {
 	if (move_player) {
-		player.move(dt, move_player_right);
+		updatePlayerPos(dt);
 	}
 }
 
@@ -111,11 +115,24 @@ void GameScene::drawScoreText() {
 void GameScene::InitSprites() {
 	player = PlayerShip(1, 50, 1, 50, 500, game);
 	player.sprite.setScale(sf::Vector2f(2.0f, 2.0f));
-	int player_xpos = game->config->screenWidth / 2 + player.sprite.getLocalBounds().width / 2 * player.sprite.getScale().x;
-	int player_ypos = playable_ySpace - player.sprite.getLocalBounds().height / 2 * player.sprite.getScale().y;
-	player.setPosition(player_xpos, player_ypos);
+
+	player_width = player.sprite.getLocalBounds().width * player.sprite.getScale().x;
+	player_height = player.sprite.getLocalBounds().height * player.sprite.getScale().y;
+
+	int player_start_xpos = game->config->screenWidth / 2 + player_width / 2;
+	int player_start_ypos = playable_yMax - player_height;
+	player.setPosition(player_start_xpos, player_start_ypos);
 }
 
-void GameScene::updatePlayerPos() {
+void GameScene::updatePlayerPos(const float dt) {
+	// Check player is within playable space
+	// If edge of player is above playable_xMin, let them move left.
+	if (playable_xMin < player.xpos && !move_player_right) {
+		player.move(dt, move_player_right);
+	}
 
+	// If edge of player is below playable_xMax, let them move right (account for top-left origin)
+	if (player.xpos + player_width < playable_xMax && move_player_right) {
+		player.move(dt, move_player_right);
+	}
 }
