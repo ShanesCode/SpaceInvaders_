@@ -21,11 +21,11 @@ class Entity {
 		virtual void move(const float dt);
 		virtual void move(const float dt, bool move_right);
 
-		void fire(const float dt);
+		virtual void fire(const float dt, bool upwards, int x_offset, int y_offset, std::vector<Entity*>* drawVec);
 		virtual void death();
 		
 		void setPosition();
 		void setPosition(float x, float y);
 
-		Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, Game* game_);
+		Entity(int health_ = 1, int movespeed_ = 5, int fireRate_ = 1, float xpos_ = 0, float ypos_ = 0, Game* game_ = nullptr);
 };

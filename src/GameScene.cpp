@@ -19,6 +19,7 @@ GameScene::GameScene(Game* game_) {
 	playable_xMin = game->config->screenWidth / 2 - playable_xSpace / 2;
 	playable_xMax = game->config->screenWidth / 2 + playable_xSpace / 2;
 
+	createEntities();
 	InitSprites();
 }
 
@@ -27,13 +28,18 @@ void GameScene::draw(const float dt) {
 	game->window.setView(guiView);
 
 	game->window.clear(sf::Color::Black);
-	game->window.draw(player.sprite);
+	drawEntities();
 	drawScoreText();
 }
 
 void GameScene::update(const float dt) {
 	if (move_player) {
 		updatePlayerPos(dt);
+	}
+
+	if (player_fire) {
+		player.fire(dt, true, 0, 0, &entitiesVec);
+		player_fire = false;
 	}
 }
 
@@ -70,6 +76,10 @@ void GameScene::handleInput() {
 				else if (event.key.code == sf::Keyboard::Right) {
 					move_player_right = true;
 				}
+			}
+
+			if (event.key.code == sf::Keyboard::Space) {
+				player_fire = true;
 			}
 			break;
 		}
@@ -112,8 +122,18 @@ void GameScene::drawScoreText() {
 	}
 }
 
-void GameScene::InitSprites() {
+void GameScene::createEntities() {
 	player = PlayerShip(1, 50, 1, 50, 500, game);
+	entitiesVec.push_back(&player);
+}
+
+void GameScene::drawEntities() {
+	for (int i = 0; i < entitiesVec.size(); i++) {
+		game->window.draw(entitiesVec[i]->sprite);
+	}
+}
+
+void GameScene::InitSprites() {
 	player.sprite.setScale(sf::Vector2f(2.0f, 2.0f));
 
 	player_width = player.sprite.getLocalBounds().width * player.sprite.getScale().x;

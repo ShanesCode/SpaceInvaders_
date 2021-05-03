@@ -27,6 +27,24 @@ void PlayerShip::move(const float dt, bool move_right) {
 	setPosition(xpos, ypos);
 }
 
+void PlayerShip::fire(const float dt, bool upwards, int x_offset, int y_offset, std::vector<Entity*>* drawVec) {
+	int readyTimer = 0;
+
+	// Only fire when ready
+	if (readyTimer <= 0) {
+		// Create projectile with velocity
+		Bullet* bullet = new Bullet(xpos + x_offset, ypos + y_offset, game);
+		drawVec->push_back(bullet);
+		std::cout << "Bang!" << std::endl;
+		readyTimer = fireRate * 60;
+	}
+
+	// Decrease ready timer
+	while (readyTimer > 0) {
+		readyTimer -= dt;
+	}
+}
+
 void PlayerShip::death() {
 	if (health == 0) {
 		alive = false;

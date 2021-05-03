@@ -66,11 +66,17 @@ void Game::gameLoop() {
 }
 
 void Game::loadTextures() {
+	// Misc
 	textureManager.loadTexture("background", "Resource/Space_Invaders_flyer,_1978.jpg");
+	
+	// Gameplay
 	textureManager.loadTexture("alien0", "Resource/alien0.png");
 	textureManager.loadTexture("alien1", "Resource/alien1.png");
 	textureManager.loadTexture("alien2", "Resource/alien2.png");
 	textureManager.loadTexture("player", "Resource/player.png");
+	textureManager.loadTexture("bullet", "Resource/bullet.png");
+
+	// UI
 	textureManager.loadTexture("sliderBG", "Resource/sliderBG.png");
 	textureManager.loadTexture("slider", "Resource/slider.png");
 }

@@ -13,21 +13,7 @@ Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float yp
 void Entity::move(const float dt) {}
 void Entity::move(const float dt, bool moveRight) {}
 
-void Entity::fire(const float dt) {
-	int readyTimer = 0;
-
-	// Only fire when ready
-	if (readyTimer <= 0) {
-		// Create projectile with velocity
-		// Bullet bullet(health, movespeed, 0, xpos, ypos + offset);
-		readyTimer = fireRate * 60;
-	}
-
-	// Decrease ready timer
-	while (readyTimer > 0) {
-		readyTimer -= dt;
-	}
-}
+void Entity::fire(const float dt, bool upwards, int x_offset, int y_offset, std::vector<Entity*>* drawVec) {}
 
 void Entity::death() {}
 
