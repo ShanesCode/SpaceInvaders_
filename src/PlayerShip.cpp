@@ -13,6 +13,8 @@ PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, float xpos_, 
 		sprite.setTexture(game->textureManager.getRef("player"));
 	}
 	setPosition(xpos, ypos);
+
+	previous_shot_time = sf::microseconds(1.0f);
 }
 
 void PlayerShip::move(const float dt, bool move_right) {

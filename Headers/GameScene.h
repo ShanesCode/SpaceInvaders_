@@ -37,6 +37,8 @@ private:
 	void updatePlayerPos(const float dt);
 	void updateBulletPos(const float dt, Entity* bullet, int index);
 
+	sf::Clock clock;
+
 public:
 	void draw(const float dt) override;
 	void update(const float dt) override;

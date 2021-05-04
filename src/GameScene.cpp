@@ -19,8 +19,16 @@ GameScene::GameScene(Game* game_) {
 	playable_xMin = game->config->screenWidth / 2 - playable_xSpace / 2;
 	playable_xMax = game->config->screenWidth / 2 + playable_xSpace / 2;
 
+	move_player = false;
+	move_player_right = false;
+	player_width = 0;
+	player_height = 0;
+	player_fire = false;
+
 	createEntities();
 	InitSprites();
+
+	clock.restart();
 }
 
 void GameScene::draw(const float dt) {
@@ -38,7 +46,13 @@ void GameScene::update(const float dt) {
 	}
 
 	if (player_fire) {
-		player.fire(dt, true, player_width / 2, 0, &entitiesVec);
+		sf::Time current_time = clock.getElapsedTime();
+
+		if (current_time > player.previous_shot_time + sf::microseconds(player.fireRate)) {
+			player.fire(dt, true, player_width / 2, 0, &entitiesVec);
+			player.previous_shot_time = clock.getElapsedTime();
+		}
+		
 		player_fire = false;
 	}
 
