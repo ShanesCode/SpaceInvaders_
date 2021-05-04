@@ -15,9 +15,9 @@ PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, float xpos_, 
 	setPosition(xpos, ypos);
 }
 
-void PlayerShip::move(const float dt, bool move_positive) {
+void PlayerShip::move(const float dt, bool move_right) {
 	// Move horizontally
-	if (move_positive) {
+	if (move_right) {
 		xpos += movespeed * dt;
 	}
 	else {

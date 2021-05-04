@@ -15,9 +15,9 @@ Bullet::Bullet(float xpos_, float ypos_, Game* game_)
 	setPosition(xpos, ypos);
 }
 
-void Bullet::move(const float dt, bool move_positive) {
+void Bullet::move(const float dt, bool move_down) {
 	// Move vertically (right == up, left == down)
-	if (move_positive) {
+	if (move_down) {
 		ypos += movespeed * dt;
 	}
 	else {
