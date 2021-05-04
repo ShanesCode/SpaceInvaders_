@@ -14,7 +14,6 @@ private:
 	void createScoreText();
 	void drawScoreText();
 
-	std::vector<Entity*> entitiesVec;
 	void createEntities();
 	void drawEntities();
 
@@ -36,11 +35,14 @@ private:
 	void InitSprites();
 
 	void updatePlayerPos(const float dt);
+	void updateBulletPos(const float dt, Entity* bullet, int index);
 
 public:
 	void draw(const float dt) override;
 	void update(const float dt) override;
 	void handleInput() override;
+
+	std::vector<Entity*> entitiesVec;
 
 	GameScene(Game* game_);
 };

@@ -4,7 +4,7 @@ Bullet::Bullet(float xpos_, float ypos_, Game* game_)
 	: Entity(health, movespeed, fireRate, xpos, ypos, game_) {
 	game = game_;
 	health = 1;
-	movespeed = 30;
+	movespeed = 100;
 	fireRate = 1;
 	xpos = xpos_;
 	ypos = ypos_;
@@ -15,24 +15,23 @@ Bullet::Bullet(float xpos_, float ypos_, Game* game_)
 	setPosition(xpos, ypos);
 }
 
-void Bullet::move(const float dt, bool move_right) {
+void Bullet::move(const float dt, bool move_positive) {
 	// Move vertically (right == up, left == down)
-	if (move_right) {
-		xpos += movespeed * dt;
+	if (move_positive) {
+		ypos += movespeed * dt;
 	}
 	else {
-		xpos -= movespeed * dt;
+		ypos -= movespeed * dt;
 	}
 
 	setPosition(xpos, ypos);
 }
 
 void Bullet::death() {
-	if (health == 0) {
-		alive = false;
-		// play death animation
+	alive = false;
+	// play death animation
 
-		// remove it from the list of enemies? something like that
-		delete this;
-	}
+	// remove it from the list of enemies? something like that
+	std::cout << "Boom!" << std::endl;
+	delete this;
 }

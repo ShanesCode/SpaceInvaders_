@@ -38,8 +38,14 @@ void GameScene::update(const float dt) {
 	}
 
 	if (player_fire) {
-		player.fire(dt, true, 0, 0, &entitiesVec);
+		player.fire(dt, true, player_width / 2, 0, &entitiesVec);
 		player_fire = false;
+	}
+
+	for (int i = 0; i < entitiesVec.size(); i++) {
+		if (typeid(*entitiesVec[i]) == typeid(Bullet)) {
+			updateBulletPos(dt, entitiesVec[i], i);
+		}
 	}
 }
 
@@ -154,5 +160,19 @@ void GameScene::updatePlayerPos(const float dt) {
 	// If edge of player is below playable_xMax, let them move right (account for top-left origin)
 	if (player.xpos + player_width < playable_xMax && move_player_right) {
 		player.move(dt, move_player_right);
+	}
+}
+
+void GameScene::updateBulletPos(const float dt, Entity* bullet, int index) {
+	// Check if bullet within playable space
+	// If edge of bullet is above playable_yMin, move it down
+	// Or if edge of bullet is below playable_yMin, move it down
+	if (playable_yMin < bullet->ypos && bullet->ypos < playable_yMax) {
+		bullet->move(dt, false);
+	}
+	// Else destroy the bullet and remove it from the vector of entities
+	else {
+		bullet->death();
+		entitiesVec.erase(entitiesVec.begin() + index);
 	}
 }

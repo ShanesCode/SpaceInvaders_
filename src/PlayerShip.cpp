@@ -15,9 +15,9 @@ PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, float xpos_, 
 	setPosition(xpos, ypos);
 }
 
-void PlayerShip::move(const float dt, bool move_right) {
+void PlayerShip::move(const float dt, bool move_positive) {
 	// Move horizontally
-	if (move_right) {
+	if (move_positive) {
 		xpos += movespeed * dt;
 	}
 	else {
@@ -27,14 +27,14 @@ void PlayerShip::move(const float dt, bool move_right) {
 	setPosition(xpos, ypos);
 }
 
-void PlayerShip::fire(const float dt, bool upwards, int x_offset, int y_offset, std::vector<Entity*>* drawVec) {
+void PlayerShip::fire(const float dt, bool upwards, int x_offset, int y_offset, std::vector<Entity*>* entitiesVec) {
 	int readyTimer = 0;
 
 	// Only fire when ready
 	if (readyTimer <= 0) {
 		// Create projectile with velocity
 		Bullet* bullet = new Bullet(xpos + x_offset, ypos + y_offset, game);
-		drawVec->push_back(bullet);
+		entitiesVec->push_back(bullet);
 		std::cout << "Bang!" << std::endl;
 		readyTimer = fireRate * 60;
 	}

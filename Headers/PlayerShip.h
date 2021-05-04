@@ -5,7 +5,7 @@ class PlayerShip : public Entity {
 private:
 
 public:
-	void move(const float dt, bool move_right) override;
+	void move(const float dt, bool move_positive) override;
 	void death() override;
 	void fire(const float dt, bool upwards, int x_offset, int y_offset, std::vector<Entity*>* drawVec) override;
 
