@@ -32,6 +32,6 @@ void Bullet::death() {
 	// play death animation
 
 	// remove it from the list of enemies? something like that
-	std::cout << "Boom!" << std::endl;
+	std::cout << "Bullet:\tDeath" << std::endl;
 	delete this;
 }

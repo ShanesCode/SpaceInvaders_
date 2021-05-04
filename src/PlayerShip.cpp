@@ -37,7 +37,7 @@ void PlayerShip::fire(const float dt, bool upwards, int x_offset, int y_offset, 
 		// Create projectile with velocity
 		Bullet* bullet = new Bullet(xpos + x_offset, ypos + y_offset, game);
 		entitiesVec->push_back(bullet);
-		std::cout << "Bang!" << std::endl;
+		std::cout << "Player:\tFire" << std::endl;
 		readyTimer = fireRate * 60;
 	}
 
