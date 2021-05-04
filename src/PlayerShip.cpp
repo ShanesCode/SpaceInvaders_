@@ -14,7 +14,7 @@ PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, float xpos_, 
 	}
 	setPosition(xpos, ypos);
 
-	previous_shot_time = sf::microseconds(1.0f);
+	previous_shot_time = sf::microseconds(0.0f);
 }
 
 void PlayerShip::move(const float dt, bool move_right) {

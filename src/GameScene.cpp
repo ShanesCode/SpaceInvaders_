@@ -48,9 +48,15 @@ void GameScene::update(const float dt) {
 	if (player_fire) {
 		sf::Time current_time = clock.getElapsedTime();
 
-		if (current_time > player.previous_shot_time + sf::microseconds(player.fireRate)) {
+		if (player.previous_shot_time == sf::microseconds(0.0f)) {
 			player.fire(dt, true, player_width / 2, 0, &entitiesVec);
 			player.previous_shot_time = clock.getElapsedTime();
+		}
+		else {
+			if (current_time > player.previous_shot_time + sf::seconds(player.fireRate)) {
+				player.fire(dt, true, player_width / 2, 0, &entitiesVec);
+				player.previous_shot_time = clock.getElapsedTime();
+			}
 		}
 		
 		player_fire = false;
