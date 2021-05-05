@@ -17,6 +17,7 @@ public:
 	void loadSound(const std::string& filename);;
 
 	void playMusic(bool loop, float volume, std::string musicFileName);
+	void playSound(bool loop, float volume, std::string soundFileName);
 
 	void pauseMusic();
 	void resumeMusic();
