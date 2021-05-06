@@ -75,6 +75,7 @@ void Game::loadTextures() {
 	textureManager.loadTexture("alien2", "Resource/alien2.png");
 	textureManager.loadTexture("player", "Resource/player.png");
 	textureManager.loadTexture("bullet", "Resource/bullet.png");
+	textureManager.loadTexture("bullet_miss", "Resource/bullet_miss.png");
 
 	// UI
 	textureManager.loadTexture("sliderBG", "Resource/sliderBG.png");

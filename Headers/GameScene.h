@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <thread>
 #include "PauseMenuScene.h"
 #include "PlayerShip.h"
 
@@ -38,6 +39,10 @@ private:
 	void updateBulletPos(const float dt, Entity* bullet, int index);
 
 	sf::Clock clock;
+
+	void destroyEntity(Entity* entity, int index);
+	void waitForSeconds(float time);
+	void bulletDeath(Entity* bullet, float time);
 
 public:
 	void draw(const float dt) override;

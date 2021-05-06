@@ -4,7 +4,7 @@ Bullet::Bullet(float xpos_, float ypos_, Game* game_)
 	: Entity(health, movespeed, fireRate, xpos, ypos, game_) {
 	game = game_;
 	health = 1;
-	movespeed = 100;
+	movespeed = 500;
 	fireRate = 1;
 	xpos = xpos_;
 	ypos = ypos_;
@@ -29,9 +29,11 @@ void Bullet::move(const float dt, bool move_down) {
 
 void Bullet::death() {
 	alive = false;
-	// play death animation
 
-	// remove it from the list of enemies? something like that
-	std::cout << "Bullet:\tDeath" << std::endl;
-	delete this;
+	// Bullets are currently being created and deleted dynamically, so the rest of this stuff is being handled
+	// In the gameScene and this just being used as a flag.. probably not the best way to do it
+
+	//sprite.setTexture(game->textureManager.getRef("bullet_miss"));
+
+	//delete this;
 }

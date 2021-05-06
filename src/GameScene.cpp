@@ -192,7 +192,47 @@ void GameScene::updateBulletPos(const float dt, Entity* bullet, int index) {
 	}
 	// Else destroy the bullet and remove it from the vector of entities
 	else {
-		bullet->death();
-		entitiesVec.erase(entitiesVec.begin() + index);
+		if (bullet->alive && bullet->health > 0) {
+			// Set health to 0 so this is only called once per bullet
+			bullet->health = 0;
+
+			// Change to miss texture and move it left to center it (account for top-left origin)
+			bullet->sprite.setTexture(game->textureManager.getRef("bullet_miss"), true);
+			bullet->sprite.setPosition(bullet->sprite.getPosition().x - bullet->sprite.getLocalBounds().width / 2, bullet->sprite.getPosition().y);
+			// Update the entitiesVec so that the draw call uses the new sprite
+			entitiesVec[index] = bullet;
+
+			// Start a new thread so that it can show spirte for time specified in bulletDeath() and delay deletion
+			// Without causing delay in main thread execution
+			std::thread waiter(&GameScene::bulletDeath, this, bullet, 0.5f);
+			waiter.detach();
+		}
+		
+		// Once specified time in bulletDeath() has passed, destroy the bullet
+		if (!bullet->alive) {
+			destroyEntity(bullet, index);
+		}
 	}
+}
+
+void GameScene::destroyEntity(Entity* entity, int index) {
+	delete entity;
+	entitiesVec.erase(entitiesVec.begin() + index);
+}
+
+void GameScene::waitForSeconds(float time) {
+	sf::Time start_time = clock.getElapsedTime();
+	sf::Time current_time = clock.getElapsedTime();
+	sf::Time wait_time = sf::seconds(time);
+
+	// While the specified time has not passed, do nothing
+	while (current_time - start_time < wait_time) {
+		current_time = clock.getElapsedTime();
+	};
+	return;
+}
+
+void GameScene::bulletDeath(Entity* bullet, float time) {
+	waitForSeconds(time);
+	bullet->death();
 }
