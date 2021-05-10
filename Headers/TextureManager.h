@@ -11,6 +11,7 @@ private:
 public:
 	// Add a texture from a file
 	void loadTexture(const std::string& name, const std::string& filename);
+	void loadTexture(const std::string& name, const std::string& filename, const sf::IntRect& area);
 
 	// Translate an id into a reference
 	sf::Texture& getRef(const std::string& texture);
