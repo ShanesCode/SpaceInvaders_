@@ -3,6 +3,7 @@
 #include <thread>
 #include "PauseMenuScene.h"
 #include "PlayerShip.h"
+#include "Saucer.h"
 
 class GameScene : public Scene {
 private:
@@ -37,12 +38,15 @@ private:
 
 	void updatePlayerPos(const float dt);
 	void updateBulletPos(const float dt, Entity* bullet, int index);
+	void updateSaucerPos(const float dt);
 
 	sf::Clock clock;
 
 	void destroyEntity(Entity* entity, int index);
 	void waitForSeconds(float time);
 	void bulletDeath(Entity* bullet, float time);
+
+	Saucer saucer;
 
 public:
 	void draw(const float dt) override;

@@ -7,5 +7,8 @@ public:
 	void move(const float dt) override;
 	void death() override;
 
-	Saucer(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, Game* game_ = nullptr);
+	void playSound();
+	void playDeathSound();
+
+	Saucer(int health_ = 1, int movespeed_ = 100, int fireRate_ = 0, float xpos_ = 0, float ypos_ = 0, Game* game_ = nullptr);
 };

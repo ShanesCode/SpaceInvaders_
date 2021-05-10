@@ -66,6 +66,9 @@ void GameScene::update(const float dt) {
 		if (typeid(*entitiesVec[i]) == typeid(Bullet)) {
 			updateBulletPos(dt, entitiesVec[i], i);
 		}
+		else if (typeid(*entitiesVec[i]) == typeid(Saucer)) {
+			updateSaucerPos(dt);
+		}
 	}
 }
 
@@ -151,6 +154,9 @@ void GameScene::drawScoreText() {
 void GameScene::createEntities() {
 	player = PlayerShip(1, 50, 1, 50, 500, game);
 	entitiesVec.push_back(&player);
+	saucer = Saucer(1, 100, 0, playable_xMax, playable_yMin + saucer.sprite.getLocalBounds().height, game);
+	saucer.playSound();
+	entitiesVec.push_back(&saucer);
 }
 
 void GameScene::drawEntities() {
@@ -160,6 +166,9 @@ void GameScene::drawEntities() {
 }
 
 void GameScene::InitSprites() {
+	saucer.sprite.setScale(sf::Vector2f(2.0f, 2.0f));
+
+	// Player
 	player.sprite.setScale(sf::Vector2f(2.0f, 2.0f));
 
 	player_width = player.sprite.getLocalBounds().width * player.sprite.getScale().x;
@@ -180,6 +189,12 @@ void GameScene::updatePlayerPos(const float dt) {
 	// If edge of player is below playable_xMax, let them move right (account for top-left origin)
 	if (player.xpos + player_width < playable_xMax && move_player_right) {
 		player.move(dt, move_player_right);
+	}
+}
+
+void GameScene::updateSaucerPos(const float dt) {
+	if (saucer.alive) {
+		saucer.move(dt);
 	}
 }
 
