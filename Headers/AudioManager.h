@@ -2,15 +2,15 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include <map>
+#include <deque>
 
 class AudioManager {
 private:
-	// Array of sfx
-	std::map<std::string, sf::Sound> sounds;
-
+	std::deque<sf::Sound> sounds;
 	sf::Music music;
 	sf::SoundBuffer soundBuffer;
-	sf::Sound sound;
+
+	void eraseFinishedSounds();
 
 public:
 	// Add a sound from a file
