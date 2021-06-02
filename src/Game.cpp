@@ -5,6 +5,7 @@
 Game::Game(Config* config_) : textManager(&fontManager) {
 	config = config_;
 	loadTextures();
+	loadSoundBuffers();
 	loadFonts();
 
 	window.create(sf::VideoMode(config->screenWidth, config->screenHeight), "Space Invaders_");
@@ -82,6 +83,12 @@ void Game::loadTextures() {
 	// UI
 	textureManager.loadTexture("sliderBG", "Resource/sliderBG.png");
 	textureManager.loadTexture("slider", "Resource/slider.png");
+}
+
+void Game::loadSoundBuffers() {
+	audioManager.loadSoundBuffer("fire", "Resource/fire.wav");
+	audioManager.loadSoundBuffer("saucer_move", "Resource/saucer_move.wav");
+	audioManager.loadSoundBuffer("saucer_death", "Resource/saucer_death.wav");
 }
 
 void Game::loadFonts() {

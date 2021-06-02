@@ -11,6 +11,7 @@ class Scene;
 class Game {
 	private:
 		void loadTextures();
+		void loadSoundBuffers();
 		void loadFonts();
 
 	public:

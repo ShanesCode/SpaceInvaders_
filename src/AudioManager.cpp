@@ -1,16 +1,21 @@
 #include "..\Headers\AudioManager.h"
 #include <iostream>
 
-void AudioManager::loadSound(const std::string& filename) {
+void AudioManager::loadSoundBuffer(const std::string& name, const std::string& filename) {
 	// Load the sound
-	sf::Sound sound;
+	sf::SoundBuffer soundBuffer;
 	soundBuffer.loadFromFile(filename);
-	sound.setBuffer(soundBuffer);
-	sounds.emplace_back(sound);
+
+	soundBuffers[name] = soundBuffer;
 }
 
-void AudioManager::playMusic(bool loop, float volume, std::string musicFileName)
+sf::SoundBuffer& AudioManager::getRef(const std::string& sound) {
+	return soundBuffers.at(sound);
+}
+
+void AudioManager::playMusic(const bool& loop, const float& volume, const std::string& musicFileName)
 {
+	sf::SoundBuffer soundBuffer;
 	soundBuffer.loadFromFile(musicFileName);
 	if (!music.openFromFile(musicFileName)) {
 		std::cout << "Failed to open the song:\t" << musicFileName << std::endl;
@@ -32,26 +37,14 @@ void AudioManager::stopMusic() {
 	music.stop();
 }
 
-void AudioManager::changeVolume(float vol) {
+void AudioManager::changeVolume(const float& vol) {
 	music.setVolume(vol);
 }
 
-void AudioManager::playSound(bool loop, float volume, std::string soundFileName)
+void AudioManager::playSound(const bool& loop, const float& volume, sf::Sound& sound, const std::string& soundRef)
 {
-	soundFileName = "Resource/" + soundFileName;
-	loadSound(soundFileName);
-	sounds.back().setVolume(volume);
-	sounds.back().play();
-	sounds.back().setLoop(loop);
-	eraseFinishedSounds();
-}
-
-void AudioManager::eraseFinishedSounds() {
-	for (int i = 0; i < sounds.size(); i++) {
-		std::cout << "looping: " << sounds[i].getLoop() << '\t' << "status: " << sounds[i].getStatus() << std::endl;
-		if (sounds[i].getStatus() == sf::Sound::Stopped) {
-			//sounds.erase(sounds.begin() + i);
-			//--i;
-		}
-	}
+	sound.setBuffer(getRef(soundRef));
+	sound.setVolume(volume);
+	sound.play();
+	sound.setLoop(loop);
 }

@@ -17,6 +17,7 @@ class Entity {
 		int movespeed;
 		int fireRate;
 		sf::Sprite sprite;
+		sf::Sound sound;
 
 		virtual void move(const float dt);
 		virtual void move(const float dt, bool move_positive);

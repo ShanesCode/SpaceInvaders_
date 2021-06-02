@@ -31,9 +31,9 @@ void Saucer::death() {
 }
 
 void Saucer::playSound() {
-	game->audioManager.playSound(true, game->config->volume, "saucer_move.wav");
+	game->audioManager.playSound(true, game->config->volume, sound, "saucer_move");
 }
 
 void Saucer::playDeathSound() {
-	game->audioManager.playSound(false, game->config->volume, "saucer_death.wav");
+	game->audioManager.playSound(false, game->config->volume, sound, "saucer_death");
 }

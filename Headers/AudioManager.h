@@ -2,25 +2,24 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include <map>
-#include <deque>
 
 class AudioManager {
 private:
-	std::deque<sf::Sound> sounds;
+	std::map<std::string, sf::SoundBuffer> soundBuffers;
 	sf::Music music;
-	sf::SoundBuffer soundBuffer;
-
-	void eraseFinishedSounds();
 
 public:
-	// Add a sound from a file
-	void loadSound(const std::string& filename);;
+	// Add a soundBuffer from a file
+	void loadSoundBuffer(const std::string& name, const std::string& filename);
 
-	void playMusic(bool loop, float volume, std::string musicFileName);
-	void playSound(bool loop, float volume, std::string soundFileName);
+	// Translate an id into a reference
+	sf::SoundBuffer& getRef(const std::string& sound);
+
+	void playMusic(const bool& loop, const float& volume, const std::string& musicFileName);
+	void playSound(const bool& loop, const float& volume, sf::Sound& sound, const std::string& soundRef);
 
 	void pauseMusic();
 	void resumeMusic();
 	void stopMusic();
-	void changeVolume(float vol);
+	void changeVolume(const float& vol);
 };

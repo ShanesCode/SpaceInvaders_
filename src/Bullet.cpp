@@ -4,7 +4,7 @@ Bullet::Bullet(float xpos_, float ypos_, Game* game_)
 	: Entity(health, movespeed, fireRate, xpos, ypos, game_) {
 	game = game_;
 	health = 1;
-	movespeed = 500;
+	movespeed = 750;
 	fireRate = 1;
 	xpos = xpos_;
 	ypos = ypos_;
