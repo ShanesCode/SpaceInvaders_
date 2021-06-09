@@ -34,7 +34,7 @@ void Config::updateConfigFile() {
 	std::map<std::string, float>::iterator iter = configVals.begin();
 	while (iter != configVals.end()) {
 		line = iter->first + delimiter + std::to_string(iter->second);
-		configFile << line << "\n";
+		configFile << line << std::endl;
 		iter++;
 	}
 
