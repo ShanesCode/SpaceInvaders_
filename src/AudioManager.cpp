@@ -48,3 +48,7 @@ void AudioManager::playSound(const bool& loop, const float& volume, sf::Sound& s
 	sound.play();
 	sound.setLoop(loop);
 }
+
+void AudioManager::stopSound(sf::Sound& sound) {
+	sound.stop();
+}

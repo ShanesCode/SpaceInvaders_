@@ -21,5 +21,6 @@ public:
 	void pauseMusic();
 	void resumeMusic();
 	void stopMusic();
+	void stopSound(sf::Sound& sound);
 	void changeVolume(const float& vol);
 };

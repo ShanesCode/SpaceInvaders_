@@ -37,3 +37,8 @@ void Saucer::playSound() {
 void Saucer::playDeathSound() {
 	game->audioManager.playSound(false, game->config->volume, sound, "saucer_death");
 }
+
+void Saucer::despawn() {
+	alive = false;
+	game->audioManager.stopSound(sound);
+}

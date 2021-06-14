@@ -48,6 +48,8 @@ private:
 
 	Saucer saucer;
 
+	bool checkSaucerOffScreen(Entity* entity);
+
 public:
 	void draw(const float dt) override;
 	void update(const float dt) override;

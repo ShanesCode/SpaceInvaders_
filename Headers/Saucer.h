@@ -9,6 +9,7 @@ public:
 
 	void playSound();
 	void playDeathSound();
+	void despawn();
 
 	Saucer(int health_ = 1, int movespeed_ = 100, int fireRate_ = 0, float xpos_ = 0, float ypos_ = 0, Game* game_ = nullptr);
 };

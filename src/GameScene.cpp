@@ -68,6 +68,10 @@ void GameScene::update(const float dt) {
 		}
 		else if (typeid(*entitiesVec[i]) == typeid(Saucer)) {
 			updateSaucerPos(dt);
+			if (checkSaucerOffScreen(entitiesVec[i])) {
+				saucer.despawn();
+				entitiesVec.erase(entitiesVec.begin() + i);
+			}
 		}
 	}
 }
@@ -171,8 +175,8 @@ void GameScene::InitSprites() {
 	// Player
 	player.sprite.setScale(sf::Vector2f(2.0f, 2.0f));
 
-	player_width = player.sprite.getLocalBounds().width * player.sprite.getScale().x;
-	player_height = player.sprite.getLocalBounds().height * player.sprite.getScale().y;
+	player_width = player.sprite.getGlobalBounds().width;
+	player_height = player.sprite.getGlobalBounds().height;
 
 	int player_start_xpos = game->config->screenWidth / 2 + player_width / 2;
 	int player_start_ypos = playable_yMax - player_height;
@@ -213,7 +217,7 @@ void GameScene::updateBulletPos(const float dt, Entity* bullet, int index) {
 
 			// Change to miss texture and move it left to center it (account for top-left origin)
 			bullet->sprite.setTexture(game->textureManager.getRef("bullet_miss"), true);
-			bullet->sprite.setPosition(bullet->sprite.getPosition().x - bullet->sprite.getLocalBounds().width / 2, bullet->sprite.getPosition().y);
+			bullet->sprite.setPosition(bullet->sprite.getPosition().x - bullet->sprite.getGlobalBounds().width / 2, bullet->sprite.getPosition().y);
 			// Update the entitiesVec so that the draw call uses the new sprite
 			entitiesVec[index] = bullet;
 
@@ -250,4 +254,11 @@ void GameScene::waitForSeconds(float time) {
 void GameScene::bulletDeath(Entity* bullet, float time) {
 	waitForSeconds(time);
 	bullet->death();
+}
+
+bool GameScene::checkSaucerOffScreen(Entity* entity) {
+	if (entity->xpos + 2 * entity->sprite.getGlobalBounds().width < playable_xMin) {
+		return true;
+	}
+	return false;
 }

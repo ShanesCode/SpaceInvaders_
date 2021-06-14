@@ -143,30 +143,30 @@ void OptionsScene::initSliderGraphics() {
 	sliderBG.setTexture(game->textureManager.getRef("sliderBG"));
 	sliderBG.setScale(sf::Vector2f(2.0f, 2.0f));
 	// X position
-	int sliderBG_xpos = game->textManager.getTextRef("volumeOptions").getPosition().x - sliderBG.getLocalBounds().width;
+	int sliderBG_xpos = game->textManager.getTextRef("volumeOptions").getPosition().x - sliderBG.getGlobalBounds().width;
 	// Y position
 	int ypos_offset = 40;
 	int sliderBG_ypos = game->textManager.getTextRef("volumeOptions").getPosition().y - ypos_offset;
 	sliderBG.setPosition(sf::Vector2f(sliderBG_xpos, sliderBG_ypos));
-	float sliderBG_width = sliderBG.getLocalBounds().width * sliderBG.getScale().x;
+	float sliderBG_width = sliderBG.getGlobalBounds().width;
 	float hundredth = sliderBG_width / 100;
 
 	// Slider knob
 	slider.setTexture(game->textureManager.getRef("slider"));
 	slider.setScale(sf::Vector2f(2.0f, 2.0f));
 	// X position should be equivalent to the current volume percentage, within the bounds of the sliderBG. Subtract half of width due to top-left origin
-	int slider_xpos = sliderBG.getPosition().x - slider.getLocalBounds().width / 2 * slider.getScale().x + hundredth * game->config->volume;
+	int slider_xpos = sliderBG.getPosition().x - slider.getGlobalBounds().width / 2 + hundredth * game->config->volume;
 	// Y position should be the position of the sliderBG, plus half sliderBG height and minus half the height of the slider due to top-left origin
-	int slider_ypos = sliderBG.getPosition().y + sliderBG.getLocalBounds().height / 2 * sliderBG.getScale().y - slider.getLocalBounds().height / 2 * slider.getScale().y;
+	int slider_ypos = sliderBG.getPosition().y + sliderBG.getGlobalBounds().height / 2 - slider.getGlobalBounds().height / 2;
 	slider.setPosition(sf::Vector2f(slider_xpos, slider_ypos));
 }
 
 void OptionsScene::updateSliderGraphic() {
-	float sliderBG_width = sliderBG.getLocalBounds().width * sliderBG.getScale().x;
+	float sliderBG_width = sliderBG.getGlobalBounds().width;
 	float hundredth = sliderBG_width / 100;
 
 	// X position should be equivalent to the current volume percentage, within the bounds of the sliderBG. Subtract half of width due to top-left origin
-	int slider_xpos = sliderBG.getPosition().x - slider.getLocalBounds().width / 2 * slider.getScale().x + hundredth * game->config->volume;
+	int slider_xpos = sliderBG.getPosition().x - slider.getGlobalBounds().width / 2 + hundredth * game->config->volume;
 
 	slider.setPosition(sf::Vector2f(slider_xpos, slider.getPosition().y));
 }

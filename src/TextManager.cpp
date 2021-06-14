@@ -12,7 +12,7 @@ void TextManager::createText(const std::string& name, const std::string& fontNam
 	text.setCharacterSize(size);
 	text.setFillColor(color);
 	text.setString(string);
-	text.setOrigin(text.getLocalBounds().left + text.getLocalBounds().width / 2.0f, text.getLocalBounds().top + text.getLocalBounds().height / 2.0f);
+	text.setOrigin(text.getGlobalBounds().left + text.getGlobalBounds().width / 2.0f, text.getGlobalBounds().top + text.getGlobalBounds().height / 2.0f);
 	text.setPosition(xpos, ypos);
 
 	texts[name] = text;
