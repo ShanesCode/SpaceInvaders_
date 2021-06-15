@@ -1,4 +1,4 @@
-#include "..\Headers\GameScene.h"
+#include "../Headers/GameScene.h"
 
 // Constructor
 GameScene::GameScene(Game* game_) {

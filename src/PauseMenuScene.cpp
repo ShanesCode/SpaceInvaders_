@@ -1,4 +1,4 @@
-#include "..\Headers\PauseMenuScene.h"
+#include "../Headers/PauseMenuScene.h"
 
 // Constructor
 PauseMenuScene::PauseMenuScene(Game* game_) : MenuScene(game_) {

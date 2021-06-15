@@ -1,4 +1,4 @@
-#include "..\Headers\HiscoresScene.h"
+#include "../Headers/HiscoresScene.h"
 
 // Constructor
 HiscoresScene::HiscoresScene(Game* game_) {
