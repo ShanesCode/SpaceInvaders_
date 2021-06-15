@@ -1,5 +1,6 @@
 **/External
 **/Debug
-**/Resource
+**/Release
+*.dll
 *.vcxproj*
 config.ini
