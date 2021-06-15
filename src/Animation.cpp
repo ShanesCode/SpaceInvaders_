@@ -1,4 +1,4 @@
-#include "..\Headers\Animation.h"
+#include "../Headers/Animation.h"
 
 // Constructor
 Animation::Animation(unsigned int startFrame_, unsigned int endFrame_, float frame_duration_) {

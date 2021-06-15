@@ -1,4 +1,4 @@
-#include "..\Headers\OptionsScene.h"
+#include "../Headers/OptionsScene.h"
 
 // Constructor
 OptionsScene::OptionsScene(Game* game_) : MenuScene(game_) {

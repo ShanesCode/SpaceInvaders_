@@ -1,4 +1,4 @@
-#include "..\Headers\Config.h"
+#include "../Headers/Config.h"
 
 Config::Config(const std::string& configFileName_) {
 	configFileName = configFileName_;

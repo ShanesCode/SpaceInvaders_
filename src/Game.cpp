@@ -1,5 +1,5 @@
-#include "..\Headers\Game.h"
-#include "..\Headers\Scene.h"
+#include "../Headers/Game.h"
+#include "../Headers/Scene.h"
 
 // Constructor
 Game::Game(Config* config_) : textManager(&fontManager) {
