@@ -38,3 +38,7 @@ void Bullet::death() {
 
 	//delete this;
 }
+
+void Bullet::onCollision() {
+	death();
+}

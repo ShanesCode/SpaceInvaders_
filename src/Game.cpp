@@ -78,7 +78,7 @@ void Game::loadTextures() {
 	textureManager.loadTexture("bullet", "Resource/bullet.png");
 	textureManager.loadTexture("bullet_miss", "Resource/bullet_miss.png");
 	textureManager.loadTexture("saucer", "Resource/saucer.png", sf::IntRect(0, 0, 16, 16));
-	textureManager.loadTexture("saucer_death", "Resource/saucer.png", sf::IntRect(16, 16, 16, 16));
+	textureManager.loadTexture("saucer_death", "Resource/saucer.png", sf::IntRect(16, 0, 16, 16));
 
 	// UI
 	textureManager.loadTexture("sliderBG", "Resource/sliderBG.png");

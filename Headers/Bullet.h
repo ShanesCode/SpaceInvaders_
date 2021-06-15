@@ -6,6 +6,6 @@ private:
 public:
 	void move(const float dt, bool move_down) override;
 	void death() override;
-
+	void onCollision() override;
 	Bullet(float xpos_, float ypos_, Game* game_);
 };

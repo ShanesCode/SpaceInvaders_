@@ -38,7 +38,7 @@ private:
 
 	void updatePlayerPos(const float dt);
 	void updateBulletPos(const float dt, Entity* bullet, int index);
-	void updateSaucerPos(const float dt);
+	void updateSaucerPos(const float dt, int index);
 
 	sf::Clock clock;
 
@@ -47,7 +47,7 @@ private:
 	void bulletDeath(Entity* bullet, float time);
 
 	Saucer saucer;
-
+	void saucerDeath(float time, int index);
 	bool checkSaucerOffScreen(Entity* entity);
 
 public:

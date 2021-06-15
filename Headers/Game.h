@@ -26,6 +26,8 @@ class Game {
 		TextManager textManager;
 		Config* config;
 
+		int score;
+
 		void pushScene(Scene* scene);
 		void popScene();
 		void changeScene(Scene* scene);

@@ -11,6 +11,7 @@ GameScene::GameScene(Game* game_) {
 	guiView.setCenter(pos);
 
 	createScoreText();
+	game->score = 0;
 
 	playable_ySpace = 0.8f * game->config->screenHeight;
 	playable_yMin = game->config->screenHeight / 2 - playable_ySpace / 2;
@@ -67,7 +68,10 @@ void GameScene::update(const float dt) {
 			// O(n^2) here, not efficient. Implement broad and narrow phase collision detection.
 			for (int j = 0; j < entitiesVec.size(); j++) {
 				if (j != i && entitiesVec[j]->collides) {
-					entitiesVec[i]->detectCollision(entitiesVec[j]->sprite.getGlobalBounds());
+					if (entitiesVec[i]->detectCollision(entitiesVec[j]->sprite.getGlobalBounds())) {
+						entitiesVec[i]->onCollision();
+						entitiesVec[j]->onCollision();
+					}
 				}
 			}
 		}
@@ -75,7 +79,7 @@ void GameScene::update(const float dt) {
 			updateBulletPos(dt, entitiesVec[i], i);
 		}
 		else if (typeid(*entitiesVec[i]) == typeid(Saucer)) {
-			updateSaucerPos(dt);
+			updateSaucerPos(dt, i);
 			if (checkSaucerOffScreen(entitiesVec[i])) {
 				saucer.despawn();
 				entitiesVec.erase(entitiesVec.begin() + i);
@@ -152,13 +156,14 @@ void GameScene::createScoreText() {
 	sf::Text* scoreLabelText = &game->textManager.getTextRef("scoreLabelText");
 	scoreTextVec.push_back(scoreLabelText);
 	
-	game->textManager.createText("scoreText", "standard", fontSize, fontColor, "0", scoreLabelText->getPosition().x + scoreLabelText->getLocalBounds().width + score_number_offset, scoreLabelText->getPosition().y);
+	game->textManager.createText("scoreText", "standard", fontSize, fontColor, std::to_string(game->score), scoreLabelText->getPosition().x + scoreLabelText->getLocalBounds().width + score_number_offset, scoreLabelText->getPosition().y);
 	sf::Text* scoreText = &game->textManager.getTextRef("scoreText");
 	scoreTextVec.push_back(scoreText);
 }
 
 void GameScene::drawScoreText() {
 	for (int i = 0; i < scoreTextVec.size(); i++) {
+		game->textManager.updateTextString("scoreText", std::to_string(game->score));
 		game->window.draw(*scoreTextVec[i]);
 	}
 }
@@ -204,9 +209,15 @@ void GameScene::updatePlayerPos(const float dt) {
 	}
 }
 
-void GameScene::updateSaucerPos(const float dt) {
+void GameScene::updateSaucerPos(const float dt, int index) {
 	if (saucer.alive) {
 		saucer.move(dt);
+	}
+	else if(saucer.health > 0) {
+		saucer.health = 0;
+		// Wait on destroyed saucer sprite then show text for points
+		std::thread saucerWaiter(&GameScene::saucerDeath, this, 0.75f, index);
+		saucerWaiter.detach();		
 	}
 }
 
@@ -232,16 +243,16 @@ void GameScene::updateBulletPos(const float dt, Entity* bullet, int index) {
 			// Update the entitiesVec so that the draw call uses the new sprite
 			entitiesVec[index] = bullet;
 
-			// Start a new thread so that it can show spirte for time specified in bulletDeath() and delay deletion
+			// Start a new thread so that it can show sprite for time specified in bulletDeath() and delay deletion
 			// Without causing delay in main thread execution
-			std::thread waiter(&GameScene::bulletDeath, this, bullet, 0.5f);
-			waiter.detach();
+			std::thread bulletWaiter(&GameScene::bulletDeath, this, bullet, 0.5f);
+			bulletWaiter.detach();
 		}
-		
-		// Once specified time in bulletDeath() has passed, destroy the bullet
-		if (!bullet->alive) {
-			destroyEntity(bullet, index);
-		}
+	}
+
+	// If out of bounds wait till the specified time in bulletDeath() has passed and destroy the bullet
+	if (!bullet->alive) {
+		destroyEntity(bullet, index);
 	}
 }
 
@@ -265,6 +276,27 @@ void GameScene::waitForSeconds(float time) {
 void GameScene::bulletDeath(Entity* bullet, float time) {
 	waitForSeconds(time);
 	bullet->death();
+}
+
+void GameScene::saucerDeath(float time, int index) {
+	waitForSeconds(time);
+
+	// Draw bonus score text
+	int fontSize = 16;
+	sf::Color fontColor = sf::Color::Red;
+	game->textManager.createText("saucerBonusText", "standard", fontSize, fontColor, std::to_string(saucer.points), saucer.xpos + saucer.sprite.getGlobalBounds().width / 2, saucer.ypos + saucer.sprite.getGlobalBounds().height / 2);
+	sf::Text* saucerBonusText = &game->textManager.getTextRef("saucerBonusText");
+	scoreTextVec.push_back(saucerBonusText);
+
+	// Remove saucer from draw vec
+	entitiesVec.erase(entitiesVec.begin() + index);
+
+	// Wait, then remove bonus text from scoreTextVec
+	waitForSeconds(time * 2);
+
+	if (scoreTextVec.size() == 3) {
+		scoreTextVec.pop_back();
+	}
 }
 
 bool GameScene::checkSaucerOffScreen(Entity* entity) {

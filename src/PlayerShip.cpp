@@ -39,7 +39,6 @@ void PlayerShip::fire(const float dt, bool upwards, int x_offset, int y_offset, 
 		entitiesVec->push_back(bullet);
 
 		game->audioManager.playSound(false, game->config->volume, sound, "fire");
-		std::cout << "Player:\tFire" << std::endl;
 		readyTimer = fireRate * 60;
 	}
 

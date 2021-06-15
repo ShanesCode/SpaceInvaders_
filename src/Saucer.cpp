@@ -10,6 +10,7 @@ Saucer::Saucer(int health_, int movespeed_, int fireRate_, float xpos_, float yp
 	xpos = xpos_;
 	ypos = ypos_;
 	alive = true;
+	points = 100;
 	if (game != nullptr) {
 		sprite.setTexture(game->textureManager.getRef("saucer"));
 	}
@@ -22,12 +23,12 @@ void Saucer::move(const float dt) {
 }
 
 void Saucer::death() {
-	if (health == 0) {
-		alive = false;
-		// play death animation
-		playDeathSound();
-		// remove it from the list of enemies? something like that
-	}
+	alive = false;
+	// play death animation
+	playDeathSound();
+	// remove it from the list of enemies? something like that
+	game->score += points;
+	sprite.setTexture(game->textureManager.getRef("saucer_death"));
 }
 
 void Saucer::playSound() {
@@ -41,4 +42,8 @@ void Saucer::playDeathSound() {
 void Saucer::despawn() {
 	alive = false;
 	game->audioManager.stopSound(sound);
+}
+
+void Saucer::onCollision() {
+	death();
 }
