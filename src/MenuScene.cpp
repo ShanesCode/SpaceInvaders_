@@ -1,4 +1,4 @@
-#include "..\Headers\MenuScene.h"
+#include "../Headers/MenuScene.h"
 
 // Constructor
 MenuScene::MenuScene(Game* game_) {

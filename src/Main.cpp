@@ -1,4 +1,4 @@
-#include "..\Headers\MainMenuScene.h"
+#include "../Headers/MainMenuScene.h"
 
 int main()
 {

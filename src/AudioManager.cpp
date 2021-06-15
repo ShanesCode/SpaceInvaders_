@@ -1,4 +1,4 @@
-#include "..\Headers\AudioManager.h"
+#include "../Headers/AudioManager.h"
 #include <iostream>
 
 void AudioManager::loadSoundBuffer(const std::string& name, const std::string& filename) {
