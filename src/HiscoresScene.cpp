@@ -48,6 +48,7 @@ void HiscoresScene::handleInput() {
 					mustBreak = true;
 				}
 			}
+			default: break;
 		}
 		if (mustBreak) { break; }
 	}
