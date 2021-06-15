@@ -1,4 +1,4 @@
-#include "..\Headers\FontManager.h"
+#include "../Headers/FontManager.h"
 
 void FontManager::loadFont(const std::string& name, const std::string& filename) {
 	// Load the texture

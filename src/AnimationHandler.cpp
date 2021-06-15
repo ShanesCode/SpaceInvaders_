@@ -1,4 +1,4 @@
-#include "..\Headers\AnimationHandler.h"
+#include "../Headers/AnimationHandler.h"
 
 // Constructor
 AnimationHandler::AnimationHandler() {

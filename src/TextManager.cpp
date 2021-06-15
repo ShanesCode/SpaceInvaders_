@@ -1,4 +1,4 @@
-#include "..\Headers\TextManager.h"
+#include "../Headers/TextManager.h"
 
 TextManager::TextManager(FontManager* fontManager_) {
 	fontManager = fontManager_;
