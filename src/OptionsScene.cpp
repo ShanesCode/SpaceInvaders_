@@ -86,7 +86,6 @@ void OptionsScene::createTitleText() {
 void OptionsScene::createMenuText() {
 	float text_offset = 54.0f;
 	int fontSize = 36;
-	sf::Color fontColor = sf::Color::Color(165, 25, 100, 255);
 
 	game->textManager.createText("volumeOptions", "standard", fontSize, selectedFontColor, "VOLUME", game->config->screenWidth / 2, game->config->screenHeight / 2);
 	std::string volumeOptions = "volumeOptions";
@@ -143,7 +142,7 @@ void OptionsScene::initSliderGraphics() {
 	sliderBG.setTexture(game->textureManager.getRef("sliderBG"));
 	sliderBG.setScale(sf::Vector2f(2.0f, 2.0f));
 	// X position
-	int sliderBG_xpos = game->textManager.getTextRef("volumeOptions").getPosition().x - sliderBG.getGlobalBounds().width;
+	int sliderBG_xpos = game->textManager.getTextRef("volumeOptions").getPosition().x - sliderBG.getGlobalBounds().width / 2;
 	// Y position
 	int ypos_offset = 40;
 	int sliderBG_ypos = game->textManager.getTextRef("volumeOptions").getPosition().y - ypos_offset;
