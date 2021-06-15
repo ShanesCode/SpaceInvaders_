@@ -29,6 +29,7 @@ void Bullet::move(const float dt, bool move_down) {
 
 void Bullet::death() {
 	alive = false;
+	collides = false;
 
 	// Bullets are currently being created and deleted dynamically, so the rest of this stuff is being handled
 	// In the gameScene and this just being used as a flag.. probably not the best way to do it

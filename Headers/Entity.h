@@ -18,6 +18,7 @@ class Entity {
 		int fireRate;
 		sf::Sprite sprite;
 		sf::Sound sound;
+		bool collides;
 
 		virtual void move(const float dt);
 		virtual void move(const float dt, bool move_positive);
@@ -28,5 +29,9 @@ class Entity {
 		void setPosition();
 		void setPosition(float x, float y);
 
-		Entity(int health_ = 1, int movespeed_ = 5, int fireRate_ = 1, float xpos_ = 0, float ypos_ = 0, Game* game_ = nullptr);
+		bool detectCollision(sf::FloatRect rect);
+
+		virtual void onCollision();
+
+		Entity(int health_ = 1, int movespeed_ = 5, int fireRate_ = 1, float xpos_ = 0, float ypos_ = 0, bool collides = false, Game* game_ = nullptr);
 };

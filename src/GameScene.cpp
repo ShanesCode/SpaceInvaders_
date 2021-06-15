@@ -49,12 +49,12 @@ void GameScene::update(const float dt) {
 		sf::Time current_time = clock.getElapsedTime();
 
 		if (player.previous_shot_time == sf::microseconds(0.0f)) {
-			player.fire(dt, true, player_width / 2, 0, &entitiesVec);
+			player.fire(dt, true, player_width / 2, -(player_height / 2), &entitiesVec);
 			player.previous_shot_time = clock.getElapsedTime();
 		}
 		else {
 			if (current_time > player.previous_shot_time + sf::seconds(player.fireRate)) {
-				player.fire(dt, true, player_width / 2, 0, &entitiesVec);
+				player.fire(dt, true, player_width / 2, -(player_height / 2), &entitiesVec);
 				player.previous_shot_time = clock.getElapsedTime();
 			}
 		}
@@ -63,6 +63,14 @@ void GameScene::update(const float dt) {
 	}
 
 	for (int i = 0; i < entitiesVec.size(); i++) {
+		if (entitiesVec[i]->collides) {
+			// O(n^2) here, not efficient. Implement broad and narrow phase collision detection.
+			for (int j = 0; j < entitiesVec.size(); j++) {
+				if (j != i && entitiesVec[j]->collides) {
+					entitiesVec[i]->detectCollision(entitiesVec[j]->sprite.getGlobalBounds());
+				}
+			}
+		}
 		if (typeid(*entitiesVec[i]) == typeid(Bullet)) {
 			updateBulletPos(dt, entitiesVec[i], i);
 		}
@@ -214,6 +222,9 @@ void GameScene::updateBulletPos(const float dt, Entity* bullet, int index) {
 		if (bullet->alive && bullet->health > 0) {
 			// Set health to 0 so this is only called once per bullet
 			bullet->health = 0;
+
+			// Turn off collisions for the bullet
+			bullet->collides = false;
 
 			// Change to miss texture and move it left to center it (account for top-left origin)
 			bullet->sprite.setTexture(game->textureManager.getRef("bullet_miss"), true);

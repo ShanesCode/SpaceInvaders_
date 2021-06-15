@@ -1,6 +1,6 @@
 #include "../Headers/Entity.h"
 
-Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, Game* game_) {
+Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, bool collides_, Game* game_) {
 	game = game_;
 	health = health_;
 	movespeed = movespeed_;
@@ -8,6 +8,7 @@ Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float yp
 	xpos = xpos_;
 	ypos = ypos_;
 	alive = true;
+	collides = collides_;
 }
 
 void Entity::move(const float dt) {}
@@ -26,3 +27,12 @@ void Entity::setPosition(float x, float y) {
 	ypos = y;
 	sprite.setPosition(sf::Vector2f(xpos, ypos));
 }
+
+bool Entity::detectCollision(sf::FloatRect other) {
+	if (collides && sprite.getGlobalBounds().intersects(other)) {
+		std::cout << "Collision detected." << std::endl;
+	}
+	return collides && sprite.getGlobalBounds().intersects(other);
+}
+
+void Entity::onCollision() {}
