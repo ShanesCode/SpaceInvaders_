@@ -68,7 +68,7 @@ void GameScene::update(const float dt) {
 			// O(n^2) here, not efficient. Implement broad and narrow phase collision detection.
 			for (int j = 0; j < entitiesVec.size(); j++) {
 				if (j != i && entitiesVec[j]->collides) {
-					if (entitiesVec[i]->detectCollision(entitiesVec[j]->sprite.getGlobalBounds())) {
+					if (entitiesVec[i]->detectCollision(*entitiesVec[j])) {
 						entitiesVec[i]->onCollision();
 						entitiesVec[j]->onCollision();
 					}
@@ -169,9 +169,9 @@ void GameScene::drawScoreText() {
 }
 
 void GameScene::createEntities() {
-	player = PlayerShip(1, 50, 1, 50, 500, game);
+	player = PlayerShip(1, 50, 1, 50, 500, true, game);
 	entitiesVec.push_back(&player);
-	saucer = Saucer(1, 100, 0, playable_xMax, playable_yMin + saucer.sprite.getLocalBounds().height, game);
+	saucer = Saucer(1, 100, 0, playable_xMax, playable_yMin + saucer.sprite.getLocalBounds().height, true, game);
 	saucer.playSound();
 	entitiesVec.push_back(&saucer);
 }

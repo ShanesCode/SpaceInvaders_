@@ -1,13 +1,14 @@
 #include "../Headers/Bullet.h"
 
-Bullet::Bullet(float xpos_, float ypos_, Game* game_)
-	: Entity(health, movespeed, fireRate, xpos, ypos, game_) {
+Bullet::Bullet(float xpos_, float ypos_, bool collides_, Game* game_)
+	: Entity(health, movespeed, fireRate, xpos, ypos, collides_, game_) {
 	game = game_;
 	health = 1;
 	movespeed = 750;
 	fireRate = 1;
 	xpos = xpos_;
 	ypos = ypos_;
+	collides = collides_;
 	alive = true;
 	if (game != nullptr) {
 		sprite.setTexture(game->textureManager.getRef("bullet"));

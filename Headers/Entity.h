@@ -29,7 +29,7 @@ class Entity {
 		void setPosition();
 		void setPosition(float x, float y);
 
-		bool detectCollision(sf::FloatRect rect);
+		bool detectCollision(const Entity& other);
 
 		virtual void onCollision();
 

@@ -12,5 +12,5 @@ class Enemy: public Entity {
 		void move(const float dt) override;
 		void death() override;
 
-		Enemy(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, Game* game_ = nullptr);
+		Enemy(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, bool collides_ = false, Game* game_ = nullptr);
 };

@@ -1,7 +1,7 @@
 #include "../Headers/PlayerShip.h"
 
-PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, Game* game_)
-	: Entity(health_, movespeed_, fireRate_, xpos_, ypos_, game_) {
+PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, bool collides_, Game* game_)
+	: Entity(health_, movespeed_, fireRate_, xpos_, ypos_, collides_, game_) {
 	game = game_;
 	health = health_;
 	movespeed = movespeed_;
@@ -9,6 +9,7 @@ PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, float xpos_, 
 	xpos = xpos_;
 	ypos = ypos_;
 	alive = true;
+	collides = collides_;
 	if (game != nullptr) {
 		sprite.setTexture(game->textureManager.getRef("player"));
 	}
@@ -35,7 +36,7 @@ void PlayerShip::fire(const float dt, bool upwards, int x_offset, int y_offset, 
 	// Only fire when ready
 	if (readyTimer <= 0) {
 		// Create projectile with velocity
-		Bullet* bullet = new Bullet(xpos + x_offset, ypos + y_offset, game);
+		Bullet* bullet = new Bullet(xpos + x_offset, ypos + y_offset, true, game);
 		entitiesVec->push_back(bullet);
 
 		game->audioManager.playSound(false, game->config->volume, sound, "fire");

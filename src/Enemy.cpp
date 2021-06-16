@@ -1,13 +1,14 @@
 #include "../Headers/Enemy.h"
 
-Enemy::Enemy(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, Game* game_)
-: Entity(health_, movespeed_, fireRate_, xpos_, ypos_, game_) {
+Enemy::Enemy(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, bool collides_, Game* game_)
+: Entity(health_, movespeed_, fireRate_, xpos_, ypos_, collides_, game_) {
 	sidemost = false;
 	health = health_;
 	movespeed = movespeed_;
 	fireRate = fireRate_;
 	xpos = xpos_;
 	ypos = ypos_;
+	collides = collides_;
 	alive = true;
 }
 
