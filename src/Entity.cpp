@@ -14,7 +14,7 @@ Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float yp
 void Entity::move(const float dt) {}
 void Entity::move(const float dt, bool move_positive) {}
 
-void Entity::fire(const float dt, bool upwards, int x_offset, int y_offset, std::vector<Entity*>* entitiesVec) {}
+void Entity::fire(const float dt, std::vector<Entity*>* entitiesVec) {}
 
 void Entity::death() {}
 

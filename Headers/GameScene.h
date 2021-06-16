@@ -22,8 +22,6 @@ private:
 	PlayerShip player;
 	bool move_player;
 	bool move_player_right;
-	int player_width;
-	int player_height;
 	bool player_fire;
 
 	// Percentage of the window the play area should take up

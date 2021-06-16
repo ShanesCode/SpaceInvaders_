@@ -7,7 +7,7 @@ private:
 public:
 	void move(const float dt, bool move_right) override;
 	void death() override;
-	void fire(const float dt, bool upwards, int x_offset, int y_offset, std::vector<Entity*>* drawVec) override;
+	void fire(const float dt, std::vector<Entity*>* drawVec) override;
 
 	sf::Time previous_shot_time;
 

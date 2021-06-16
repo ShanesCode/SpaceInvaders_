@@ -30,8 +30,12 @@ void PlayerShip::move(const float dt, bool move_right) {
 	setPosition(xpos, ypos);
 }
 
-void PlayerShip::fire(const float dt, bool upwards, int x_offset, int y_offset, std::vector<Entity*>* entitiesVec) {
+void PlayerShip::fire(const float dt, std::vector<Entity*>* entitiesVec) {
 	int readyTimer = 0;
+
+	bool upwards = true;
+	int x_offset = sprite.getGlobalBounds().width / 2;
+	int y_offset = -(sprite.getGlobalBounds().height / 2);
 
 	// Only fire when ready
 	if (readyTimer <= 0) {

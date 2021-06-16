@@ -21,8 +21,13 @@ void Enemy::move(const float dt) {
 	}
 }
 
-void Enemy::chooseShooter() {
+void Enemy::fire(const float dt, std::vector<Entity*>* entitiesVec) {
 	// Choose who fires next
+	bool upwards = false;
+	int x_offset = sprite.getGlobalBounds().width / 2;
+	int y_offset = sprite.getGlobalBounds().height / 2;
+
+	Bullet* bullet = new Bullet(xpos + x_offset, ypos + y_offset, true, game);
 }
 
 void Enemy::death() {

@@ -22,8 +22,6 @@ GameScene::GameScene(Game* game_) {
 
 	move_player = false;
 	move_player_right = false;
-	player_width = 0;
-	player_height = 0;
 	player_fire = false;
 
 	createEntities();
@@ -50,12 +48,12 @@ void GameScene::update(const float dt) {
 		sf::Time current_time = clock.getElapsedTime();
 
 		if (player.previous_shot_time == sf::microseconds(0.0f)) {
-			player.fire(dt, true, player_width / 2, -(player_height / 2), &entitiesVec);
+			player.fire(dt, &entitiesVec);
 			player.previous_shot_time = clock.getElapsedTime();
 		}
 		else {
 			if (current_time > player.previous_shot_time + sf::seconds(player.fireRate)) {
-				player.fire(dt, true, player_width / 2, -(player_height / 2), &entitiesVec);
+				player.fire(dt, &entitiesVec);
 				player.previous_shot_time = clock.getElapsedTime();
 			}
 		}
@@ -188,11 +186,8 @@ void GameScene::InitSprites() {
 	// Player
 	player.sprite.setScale(sf::Vector2f(2.0f, 2.0f));
 
-	player_width = player.sprite.getGlobalBounds().width;
-	player_height = player.sprite.getGlobalBounds().height;
-
-	int player_start_xpos = game->config->screenWidth / 2 + player_width / 2;
-	int player_start_ypos = playable_yMax - player_height;
+	int player_start_xpos = game->config->screenWidth / 2 + player.sprite.getGlobalBounds().width / 2;
+	int player_start_ypos = playable_yMax - player.sprite.getGlobalBounds().height;
 	player.setPosition(player_start_xpos, player_start_ypos);
 }
 
@@ -204,7 +199,7 @@ void GameScene::updatePlayerPos(const float dt) {
 	}
 
 	// If edge of player is below playable_xMax, let them move right (account for top-left origin)
-	if (player.xpos + player_width < playable_xMax && move_player_right) {
+	if (player.xpos + player.sprite.getGlobalBounds().width < playable_xMax && move_player_right) {
 		player.move(dt, move_player_right);
 	}
 }

@@ -23,7 +23,7 @@ class Entity {
 		virtual void move(const float dt);
 		virtual void move(const float dt, bool move_positive);
 
-		virtual void fire(const float dt, bool upwards, int x_offset, int y_offset, std::vector<Entity*>* entitiesVec);
+		virtual void fire(const float dt, std::vector<Entity*>* entitiesVec);
 		virtual void death();
 		
 		void setPosition();
