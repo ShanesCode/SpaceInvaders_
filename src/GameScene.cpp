@@ -77,7 +77,6 @@ void GameScene::update(const float dt) {
 			updateSaucerPos(dt, i);
 			if (checkSaucerOffScreen(entitiesVec[i])) {
 				saucer.despawn();
-				entitiesVec.erase(entitiesVec.begin() + i);
 			}
 		}
 		else if (typeid(*entitiesVec[i]) == typeid(Enemy)) {
