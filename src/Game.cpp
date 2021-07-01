@@ -9,7 +9,7 @@ Game::Game(Config* config_) : textManager(&fontManager) {
 	loadFonts();
 
 	window.create(sf::VideoMode(config->screenWidth, config->screenHeight), "Space Invaders_");
-	window.setFramerateLimit(60);
+	window.setFramerateLimit(120);
 
 	background.setTexture(textureManager.getRef("background"));
 }
@@ -74,6 +74,7 @@ void Game::loadTextures() {
 	textureManager.loadTexture("alien0", "Resource/alien0.png");
 	textureManager.loadTexture("alien1", "Resource/alien1.png");
 	textureManager.loadTexture("alien2", "Resource/alien2.png");
+	textureManager.loadTexture("alien_death", "Resource/alien_death.png");
 	textureManager.loadTexture("player", "Resource/player.png");
 	textureManager.loadTexture("bullet", "Resource/bullet.png");
 	textureManager.loadTexture("bullet_miss", "Resource/bullet_miss.png");

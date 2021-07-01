@@ -7,6 +7,8 @@ class Enemy: public Entity {
 		// If a sidemost hits the edge of the screen, all enemies change direction
 		bool sidemost;
 		void changeDirection();
+		int type;
+		void playDeathSound();
 
 	public:
 		void move(const float dt) override;
@@ -14,5 +16,9 @@ class Enemy: public Entity {
 
 		void fire(const float dt, std::vector<Entity*>* entitiesVec) override;
 
-		Enemy(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, bool collides_ = false, Game* game_ = nullptr);
+		int points;
+
+		void onCollision() override;
+
+		Enemy(int type_ = 0, int health_ = 1, int movespeed_ = 0, int fireRate_ = 0, float xpos_ = 0.0f, float ypos_ = 0.0f, bool collides_ = false, int points = 10, Game* game_ = nullptr);
 };

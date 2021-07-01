@@ -28,11 +28,8 @@ void Entity::setPosition(float x, float y) {
 	sprite.setPosition(sf::Vector2f(xpos, ypos));
 }
 
-bool Entity::detectCollision(const Entity& other) {
-	if (this->collides && other.collides && sprite.getGlobalBounds().intersects(other.sprite.getGlobalBounds())) {
-		std::cout << "Collision detected." << std::endl;
-	}
-	return this->collides && sprite.getGlobalBounds().intersects(other.sprite.getGlobalBounds());
+bool Entity::detectCollision(Entity& other) {
+	return false;
 }
 
 void Entity::onCollision() {}

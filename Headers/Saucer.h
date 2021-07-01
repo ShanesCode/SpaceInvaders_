@@ -2,13 +2,12 @@
 #include "Entity.h"
 class Saucer : public Entity {
 private:
-
+	void playDeathSound();
 public:
 	void move(const float dt) override;
 	void death() override;
 
 	void playSound();
-	void playDeathSound();
 	void despawn();
 
 	void onCollision() override;

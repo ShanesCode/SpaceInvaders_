@@ -8,4 +8,6 @@ public:
 	void death() override;
 	void onCollision() override;
 	Bullet(float xpos_ = 0, float ypos_ = 0, bool collides_ = false, Game* game_ = nullptr);
+
+	bool detectCollision(Entity& other) override;
 };

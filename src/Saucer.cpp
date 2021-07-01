@@ -25,9 +25,7 @@ void Saucer::move(const float dt) {
 
 void Saucer::death() {
 	alive = false;
-	// play death animation
 	playDeathSound();
-	// remove it from the list of enemies? something like that
 	game->score += points;
 	sprite.setTexture(game->textureManager.getRef("saucer_death"));
 }

@@ -43,8 +43,8 @@ void EnemyHiveMind::populate(int noOfEnemiesInRow, int noOfRows) {
 	for (int i = 0; i < noOfRows; i++) {
 		std::vector<Enemy*> EnemyRow;
 		for (int j = 0; j < noOfEnemiesInRow; j++) {
-			Enemy enemy = Enemy(EnemyHealth, moveSpeed, fireRate, j * tile_size, i * tile_size);
-			EnemyRow.push_back(&enemy);
+			//Enemy enemy = Enemy(EnemyHealth, moveSpeed, fireRate, j * tile_size, i * tile_size);
+			//EnemyRow.push_back(&enemy);
 		}
 		Enemy2DArray.push_back(EnemyRow);
 	}

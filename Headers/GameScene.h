@@ -4,6 +4,7 @@
 #include "PauseMenuScene.h"
 #include "PlayerShip.h"
 #include "Saucer.h"
+#include "Enemy.h"
 
 class GameScene : public Scene {
 private:
@@ -37,6 +38,7 @@ private:
 	void updatePlayerPos(const float dt);
 	void updateBulletPos(const float dt, Entity* bullet, int index);
 	void updateSaucerPos(const float dt, int index);
+	void updateEnemyPos(const float dt, int index);
 
 	sf::Clock clock;
 
@@ -47,6 +49,9 @@ private:
 	Saucer saucer;
 	void saucerDeath(float time, int index);
 	bool checkSaucerOffScreen(Entity* entity);
+
+	std::vector<Enemy> enemies;
+	void enemyDeath(float time, int index);
 
 public:
 	void draw(const float dt) override;

@@ -62,18 +62,15 @@ void GameScene::update(const float dt) {
 	}
 
 	for (int i = 0; i < entitiesVec.size(); i++) {
-		if (entitiesVec[i]->collides) {
-			// O(n^2) here, not efficient. Implement broad and narrow phase collision detection.
+		// Check for bullet collisions
+		if (typeid(*entitiesVec[i]) == typeid(Bullet)) {
 			for (int j = 0; j < entitiesVec.size(); j++) {
-				if (j != i && entitiesVec[j]->collides) {
+				if (j != i && typeid(*entitiesVec[j]) != typeid(Bullet) && entitiesVec[j]->collides) {
 					if (entitiesVec[i]->detectCollision(*entitiesVec[j])) {
-						entitiesVec[i]->onCollision();
-						entitiesVec[j]->onCollision();
+						break;
 					}
 				}
 			}
-		}
-		if (typeid(*entitiesVec[i]) == typeid(Bullet)) {
 			updateBulletPos(dt, entitiesVec[i], i);
 		}
 		else if (typeid(*entitiesVec[i]) == typeid(Saucer)) {
@@ -82,6 +79,9 @@ void GameScene::update(const float dt) {
 				saucer.despawn();
 				entitiesVec.erase(entitiesVec.begin() + i);
 			}
+		}
+		else if (typeid(*entitiesVec[i]) == typeid(Enemy)) {
+			updateEnemyPos(dt, i);
 		}
 	}
 }
@@ -167,11 +167,19 @@ void GameScene::drawScoreText() {
 }
 
 void GameScene::createEntities() {
-	player = PlayerShip(1, 50, 1, 50, 500, true, game);
+	player = PlayerShip(1, 100, 1, 50, 500, true, game);
 	entitiesVec.push_back(&player);
+
 	saucer = Saucer(1, 100, 0, playable_xMax, playable_yMin + saucer.sprite.getLocalBounds().height, true, game);
 	saucer.playSound();
 	entitiesVec.push_back(&saucer);
+
+	Enemy enemy0 = Enemy(0, 1, 0, 0, playable_xMin + 400, playable_yMin + 100, true, 10, game);
+	Enemy enemy1 = Enemy(1, 1, 0, 0, playable_xMin + 400, playable_yMin + 100, true, 20, game);
+	Enemy enemy2 = Enemy(2, 1, 0, 0, playable_xMin + 400, playable_yMin + 100, true, 30, game);
+	enemies.insert(enemies.end(), 11, enemy2);
+	enemies.insert(enemies.end(), 22, enemy1);
+	enemies.insert(enemies.end(), 22, enemy0);
 }
 
 void GameScene::drawEntities() {
@@ -182,13 +190,21 @@ void GameScene::drawEntities() {
 
 void GameScene::InitSprites() {
 	saucer.sprite.setScale(sf::Vector2f(2.0f, 2.0f));
-
+	
 	// Player
 	player.sprite.setScale(sf::Vector2f(2.0f, 2.0f));
 
 	int player_start_xpos = game->config->screenWidth / 2 + player.sprite.getGlobalBounds().width / 2;
 	int player_start_ypos = playable_yMax - player.sprite.getGlobalBounds().height;
 	player.setPosition(player_start_xpos, player_start_ypos);
+
+	// Enemies
+	int enemy_y_offset = 100;
+	for (int i = 0; i < enemies.size(); i++) {
+		enemies[i].sprite.setScale(sf::Vector2f(2.0f, 2.0f));
+		enemies[i].setPosition(playable_xMin + (i % 11) * enemies[i].sprite.getGlobalBounds().width * 1.5f, playable_yMin + enemy_y_offset + (i / 11) * enemies[i].sprite.getGlobalBounds().width * 1.5f);
+		entitiesVec.push_back(&enemies[i]);
+	}
 }
 
 void GameScene::updatePlayerPos(const float dt) {
@@ -210,9 +226,23 @@ void GameScene::updateSaucerPos(const float dt, int index) {
 	}
 	else if(saucer.health > 0) {
 		saucer.health = 0;
+		saucer.collides = false;
 		// Wait on destroyed saucer sprite then show text for points
 		std::thread saucerWaiter(&GameScene::saucerDeath, this, 0.75f, index);
 		saucerWaiter.detach();		
+	}
+}
+
+void GameScene::updateEnemyPos(const float dt, int index) {
+	if (entitiesVec[index]->alive) {
+		entitiesVec[index]->move(dt);
+	}
+	else if (entitiesVec[index]->health > 0) {
+		entitiesVec[index]->health = 0;
+		entitiesVec[index]->collides = false;
+		// Wait on destroyed enemy sprite then erase enemy
+		std::thread enemyWaiter(&GameScene::enemyDeath, this, 0.5f, index);
+		enemyWaiter.detach();
 	}
 }
 
@@ -284,7 +314,7 @@ void GameScene::saucerDeath(float time, int index) {
 	scoreTextVec.push_back(saucerBonusText);
 
 	// Remove saucer from draw vec
-	entitiesVec.erase(entitiesVec.begin() + index);
+	entitiesVec[index]->setPosition(-50, -50);
 
 	// Wait, then remove bonus text from scoreTextVec
 	waitForSeconds(time * 2);
@@ -292,6 +322,13 @@ void GameScene::saucerDeath(float time, int index) {
 	if (scoreTextVec.size() == 3) {
 		scoreTextVec.pop_back();
 	}
+}
+
+void GameScene::enemyDeath(float time, int index) {
+	waitForSeconds(time);
+	
+	// Remove enemy from draw vec
+	entitiesVec[index]->setPosition(-50, -50);
 }
 
 bool GameScene::checkSaucerOffScreen(Entity* entity) {

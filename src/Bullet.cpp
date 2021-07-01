@@ -40,6 +40,15 @@ void Bullet::death() {
 	//delete this;
 }
 
+bool Bullet::detectCollision(Entity& other) {
+	if (this->collides && other.collides && sprite.getGlobalBounds().intersects(other.sprite.getGlobalBounds())) {
+		onCollision();
+		other.onCollision();
+		return true;
+	}
+	return false;
+}
+
 void Bullet::onCollision() {
 	death();
 }

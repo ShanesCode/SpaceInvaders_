@@ -29,7 +29,7 @@ class Entity {
 		void setPosition();
 		void setPosition(float x, float y);
 
-		bool detectCollision(const Entity& other);
+		virtual bool detectCollision(Entity& other);
 
 		virtual void onCollision();
 
