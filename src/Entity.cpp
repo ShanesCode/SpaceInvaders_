@@ -1,6 +1,6 @@
 #include "../Headers/Entity.h"
 
-Entity::Entity(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, bool collides_, Game* game_) {
+Entity::Entity(int health_, int movespeed_, int fireRate_, int xpos_, int ypos_, bool collides_, Game* game_) {
 	game = game_;
 	health = health_;
 	movespeed = movespeed_;

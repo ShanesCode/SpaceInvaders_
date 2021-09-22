@@ -14,5 +14,5 @@ public:
 
 	int points;
 
-	Saucer(int health_ = 1, int movespeed_ = 100, int fireRate_ = 0, float xpos_ = 0, float ypos_ = 0, bool collides_ = false, Game* game_ = nullptr);
+	Saucer(int health_ = 1, int movespeed_ = 100, int fireRate_ = 0, int xpos_ = 0, int ypos_ = 0, bool collides_ = false, Game* game_ = nullptr);
 };

@@ -6,8 +6,8 @@
 
 class EnemyHiveMind {
 private:
-	float xpos;
-	float ypos;
+	int xpos;
+	int ypos;
 	float tile_size;
 
 	bool moveRight;

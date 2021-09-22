@@ -10,8 +10,8 @@ class Entity {
 		Game* game;
 
 	public :
-		float xpos;
-		float ypos;
+		int xpos;
+		int ypos;
 		bool alive;
 		int health;
 		int movespeed;
@@ -33,5 +33,5 @@ class Entity {
 
 		virtual void onCollision();
 
-		Entity(int health_ = 1, int movespeed_ = 5, int fireRate_ = 1, float xpos_ = 0, float ypos_ = 0, bool collides = false, Game* game_ = nullptr);
+		Entity(int health_ = 1, int movespeed_ = 5, int fireRate_ = 1, int xpos_ = 0, int ypos_ = 0, bool collides = false, Game* game_ = nullptr);
 };

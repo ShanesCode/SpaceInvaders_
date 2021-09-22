@@ -1,6 +1,6 @@
 #include "../Headers/PlayerShip.h"
 
-PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, bool collides_, Game* game_)
+PlayerShip::PlayerShip(int health_, int movespeed_, int fireRate_, int xpos_, int ypos_, bool collides_, Game* game_)
 	: Entity(health_, movespeed_, fireRate_, xpos_, ypos_, collides_, game_) {
 	game = game_;
 	health = health_;

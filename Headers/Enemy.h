@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Bullet.h"
-class Enemy: public Entity {
+class Enemy : public Entity {
 	private:
 		// Bool to check if this enemy is at the edge of the "block" of enemies
 		// If a sidemost hits the edge of the screen, all enemies change direction
@@ -20,5 +20,5 @@ class Enemy: public Entity {
 
 		void onCollision() override;
 
-		Enemy(int type_ = 0, int health_ = 1, int movespeed_ = 0, int fireRate_ = 0, float xpos_ = 0.0f, float ypos_ = 0.0f, bool collides_ = false, int points = 10, Game* game_ = nullptr);
+		Enemy(int type_ = 0, int health_ = 1, int movespeed_ = 0, int fireRate_ = 0, int xpos_ = 0, int ypos_ = 0, bool collides_ = false, int points = 10, Game* game_ = nullptr);
 };

@@ -11,5 +11,5 @@ public:
 
 	sf::Time previous_shot_time;
 
-	PlayerShip(int health_ = 1, int movespeed_ = 5, int fireRate_ = 1, float xpos_ = 0, float ypos_ = 0, bool collides_ = false, Game* game_ = nullptr);
+	PlayerShip(int health_ = 1, int movespeed_ = 5, int fireRate_ = 1, int xpos_ = 0, int ypos_ = 0, bool collides_ = false, Game* game_ = nullptr);
 };

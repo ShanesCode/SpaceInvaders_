@@ -1,6 +1,6 @@
 #include "../Headers/Bullet.h"
 
-Bullet::Bullet(float xpos_, float ypos_, bool collides_, Game* game_)
+Bullet::Bullet(int xpos_, int ypos_, bool collides_, Game* game_)
 	: Entity(health, movespeed, fireRate, xpos, ypos, collides_, game_) {
 	game = game_;
 	health = 1;
@@ -34,10 +34,6 @@ void Bullet::death() {
 
 	// Bullets are currently being created and deleted dynamically, so the rest of this stuff is being handled
 	// In the gameScene and this just being used as a flag.. probably not the best way to do it
-
-	//sprite.setTexture(game->textureManager.getRef("bullet_miss"));
-
-	//delete this;
 }
 
 bool Bullet::detectCollision(Entity& other) {

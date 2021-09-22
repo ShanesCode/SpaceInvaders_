@@ -1,6 +1,6 @@
 #include "../Headers/Enemy.h"
 
-Enemy::Enemy(int type_, int health_, int movespeed_, int fireRate_, float xpos_, float ypos_, bool collides_, int points_, Game* game_)
+Enemy::Enemy(int type_, int health_, int movespeed_, int fireRate_, int xpos_, int ypos_, bool collides_, int points_, Game* game_)
 : Entity(health_, movespeed_, fireRate_, xpos_, ypos_, collides_, game_) {
 	sidemost = false;
 	health = health_;
