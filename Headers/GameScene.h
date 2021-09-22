@@ -5,6 +5,7 @@
 #include "PlayerShip.h"
 #include "Saucer.h"
 #include "Enemy.h"
+#include "Building.h"
 
 class GameScene : public Scene {
 private:
@@ -47,11 +48,14 @@ private:
 	void bulletDeath(Entity* bullet, float time);
 
 	Saucer saucer;
+
 	void saucerDeath(float time, int index);
 	bool checkSaucerOffScreen(Entity* entity);
 
 	std::vector<Enemy> enemies;
 	void enemyDeath(float time, int index);
+
+	std::vector<Building> buildings;
 
 public:
 	void draw(const float dt) override;

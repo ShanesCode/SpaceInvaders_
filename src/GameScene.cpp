@@ -153,7 +153,7 @@ void GameScene::createScoreText() {
 	sf::Text* scoreLabelText = &game->textManager.getTextRef("scoreLabelText");
 	scoreTextVec.push_back(scoreLabelText);
 	
-	game->textManager.createText("scoreText", "standard", fontSize, fontColor, std::to_string(game->score), scoreLabelText->getPosition().x + scoreLabelText->getLocalBounds().width + score_number_offset, scoreLabelText->getPosition().y);
+	game->textManager.createText("scoreText", "standard", fontSize, fontColor, std::to_string(game->score), scoreLabelText->getPosition().x + scoreLabelText->getGlobalBounds().width + score_number_offset, scoreLabelText->getPosition().y);
 	sf::Text* scoreText = &game->textManager.getTextRef("scoreText");
 	scoreTextVec.push_back(scoreText);
 }
@@ -166,23 +166,30 @@ void GameScene::drawScoreText() {
 }
 
 void GameScene::createEntities() {
-	player = PlayerShip(1, 100, 1, 50, 500, true, game);
+	player = PlayerShip(1, 175, 1, 50, 500, true, game);
 	entitiesVec.push_back(&player);
 
-	saucer = Saucer(1, 100, 0, playable_xMax, playable_yMin + saucer.sprite.getLocalBounds().height, true, game);
+	saucer = Saucer(1, 150, 0, playable_xMax, playable_yMin + saucer.sprite.getGlobalBounds().height, true, game);
 	saucer.playSound();
 	entitiesVec.push_back(&saucer);
 
+	int enemy0_count = 11;
+	int enemy1_count = 22;
+	int enemy2_count = 22;
 	Enemy enemy0 = Enemy(0, 1, 0, 0, playable_xMin + 400, playable_yMin + 100, true, 10, game);
 	Enemy enemy1 = Enemy(1, 1, 0, 0, playable_xMin + 400, playable_yMin + 100, true, 20, game);
 	Enemy enemy2 = Enemy(2, 1, 0, 0, playable_xMin + 400, playable_yMin + 100, true, 30, game);
-	enemies.insert(enemies.end(), 11, enemy2);
-	enemies.insert(enemies.end(), 22, enemy1);
-	enemies.insert(enemies.end(), 22, enemy0);
+	enemies.insert(enemies.end(), enemy0_count, enemy2);
+	enemies.insert(enemies.end(), enemy1_count, enemy1);
+	enemies.insert(enemies.end(), enemy2_count, enemy0);
+
+	int building_count = 4;
+	Building building = Building(playable_xMin, player.ypos, true, game);
+	buildings.insert(buildings.end(), building_count, building);
 }
 
 void GameScene::drawEntities() {
-	for (int i = 0; i < entitiesVec.size(); i++) {
+	for (size_t i = 0; i < entitiesVec.size(); i++) {
 		game->window.draw(entitiesVec[i]->sprite);
 	}
 }
@@ -199,10 +206,25 @@ void GameScene::InitSprites() {
 
 	// Enemies
 	int enemy_y_offset = 100;
-	for (int i = 0; i < enemies.size(); i++) {
+	for (size_t i = 0; i < enemies.size(); i++) {
 		enemies[i].sprite.setScale(sf::Vector2f(2.0f, 2.0f));
-		enemies[i].setPosition(playable_xMin + (i % 11) * enemies[i].sprite.getGlobalBounds().width * 1.5f, playable_yMin + enemy_y_offset + (i / 11) * enemies[i].sprite.getGlobalBounds().width * 1.5f);
+		enemies[i].setPosition(playable_xMin + (i % 11) * enemies[i].sprite.getGlobalBounds().width * 1.5f, playable_yMin + enemy_y_offset + (i / 11) * enemies[i].sprite.getGlobalBounds().height * 1.5f);
 		entitiesVec.push_back(&enemies[i]);
+	}
+
+	// Buildings
+	int building_y_offset = 525;
+	int building_x_offset = ((playable_xMax - playable_xMin) - (buildings[0].sprite.getGlobalBounds().width * 2 * buildings.size())) / (buildings.size() + 1);
+	for (size_t i = 0; i < buildings.size(); i++) {
+		buildings[i].sprite.setScale(sf::Vector2f(2.0f, 2.0f));
+		if (i == 0) {
+			buildings[i].setPosition(playable_xMin + building_x_offset, playable_yMin + building_y_offset);
+		}
+		else {
+			buildings[i].setPosition(buildings[i - 1].xpos + buildings[i - 1].sprite.getGlobalBounds().width + building_x_offset, buildings[i - 1].ypos);
+		}
+		
+		entitiesVec.push_back(&buildings[i]);
 	}
 }
 
