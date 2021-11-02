@@ -20,6 +20,9 @@ private:
 
 	void createEntities();
 	void drawEntities();
+	
+	void createBuildings();
+	void drawBuildings();
 
 	PlayerShip player;
 	bool move_player;
@@ -63,6 +66,7 @@ public:
 	void handleInput() override;
 
 	std::vector<Entity*> entitiesVec;
+	std::vector<Building*> buildingsVec;
 
 	GameScene(Game* game_);
 };

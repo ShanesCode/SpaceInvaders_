@@ -25,6 +25,7 @@ GameScene::GameScene(Game* game_) {
 	player_fire = false;
 
 	createEntities();
+	createBuildings();
 	InitSprites();
 
 	clock.restart();
@@ -36,6 +37,7 @@ void GameScene::draw(const float dt) {
 
 	game->window.clear(sf::Color::Black);
 	drawEntities();
+	drawBuildings();
 	drawScoreText();
 }
 
@@ -182,7 +184,9 @@ void GameScene::createEntities() {
 	enemies.insert(enemies.end(), enemy0_count, enemy2);
 	enemies.insert(enemies.end(), enemy1_count, enemy1);
 	enemies.insert(enemies.end(), enemy2_count, enemy0);
+}
 
+void GameScene::createBuildings() {
 	int building_count = 4;
 	Building building = Building(playable_xMin, player.ypos, true, game);
 	buildings.insert(buildings.end(), building_count, building);
@@ -191,6 +195,12 @@ void GameScene::createEntities() {
 void GameScene::drawEntities() {
 	for (size_t i = 0; i < entitiesVec.size(); i++) {
 		game->window.draw(entitiesVec[i]->sprite);
+	}
+}
+
+void GameScene::drawBuildings() {
+	for (size_t i = 0; i < buildingsVec.size(); i++) {
+		game->window.draw(*buildingsVec[i]);
 	}
 }
 
@@ -214,17 +224,17 @@ void GameScene::InitSprites() {
 
 	// Buildings
 	int building_y_offset = 525;
-	int building_x_offset = ((playable_xMax - playable_xMin) - (buildings[0].sprite.getGlobalBounds().width * 2 * buildings.size())) / (buildings.size() + 1);
+	int building_x_offset = ((playable_xMax - playable_xMin) - (buildings[0].width * buildings.size())) / (buildings.size() + 1);
 	for (size_t i = 0; i < buildings.size(); i++) {
-		buildings[i].sprite.setScale(sf::Vector2f(2.0f, 2.0f));
 		if (i == 0) {
-			buildings[i].setPosition(playable_xMin + building_x_offset, playable_yMin + building_y_offset);
+			buildings[i].Entity::setPosition(playable_xMin + building_x_offset, playable_yMin + building_y_offset);
 		}
 		else {
-			buildings[i].setPosition(buildings[i - 1].xpos + buildings[i - 1].sprite.getGlobalBounds().width + building_x_offset, buildings[i - 1].ypos);
+			buildings[i].Entity::setPosition(buildings[i - 1].xpos + buildings[0].width + building_x_offset, buildings[i - 1].ypos);
 		}
-		
-		entitiesVec.push_back(&buildings[i]);
+		buildings[i].updateVertexPositions();
+
+		buildingsVec.push_back(&buildings[i]);
 	}
 }
 
