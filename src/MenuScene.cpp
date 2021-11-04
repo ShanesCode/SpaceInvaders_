@@ -63,7 +63,7 @@ void MenuScene::handleInput() {
 void MenuScene::createTitleText() {}
 
 void MenuScene::drawTitleText() {
-	for (int i = 0; i < titleTextRefsVec.size(); i++) {
+	for (size_t i = 0; i < titleTextRefsVec.size(); i++) {
 		game->window.draw(game->textManager.getTextRef(titleTextRefsVec[i]));
 	}
 }
@@ -71,7 +71,7 @@ void MenuScene::drawTitleText() {
 void MenuScene::createMenuText() {}
 
 void MenuScene::drawMenuText() {
-	for (int i = 0; i < menuTextRefsVec.size(); i++) {
+	for (size_t i = 0; i < menuTextRefsVec.size(); i++) {
 		game->window.draw(game->textManager.getTextRef(menuTextRefsVec[i]));
 	}
 }

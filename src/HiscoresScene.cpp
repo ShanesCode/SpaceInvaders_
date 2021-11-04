@@ -65,7 +65,7 @@ void HiscoresScene::createTitleText() {
 }
 
 void HiscoresScene::drawTitleText() {
-	for (int i = 0; i < titleTextRefsVec.size(); i++) {
+	for (size_t i = 0; i < titleTextRefsVec.size(); i++) {
 		game->window.draw(game->textManager.getTextRef(titleTextRefsVec[i]));
 	}
 }
@@ -77,7 +77,7 @@ void HiscoresScene::createMenuText() {
 }
 
 void HiscoresScene::drawMenuText() {
-	for (int i = 0; i < menuTextRefsVec.size(); i++) {
+	for (size_t i = 0; i < menuTextRefsVec.size(); i++) {
 		game->window.draw(game->textManager.getTextRef(menuTextRefsVec[i]));
 	}
 }
